@@ -1,0 +1,62 @@
+.about {
+  margin-top: 100px;
+  overflow: hidden;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 30px;
+  min-height: 390px;
+  margin-bottom: 50px;
+}
+
+.imgSlider > img {
+  width: 490px;
+}
+.about > * {
+  float: left;
+}
+.about > article {
+  margin-left: 20px;
+}
+
+.commentWritingForm {
+  width: 100%;
+  padding-left: 96px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 20px;
+}
+.commentWritingForm > textarea {
+  width: 80%;
+  margin: auto;
+  height: 50px;
+}
+.reviews {
+  list-style: none;
+  padding: 0;
+}
+.reviews > li {
+  font-size: 16px;
+  border-bottom: 1px solid #eee;
+  padding: 10px 0;
+  padding-left: 96px;
+}
+.reviews .writer {
+  font-size: 18px;
+  font-weight: 700;
+}
+.reviews .stars {
+  font-size: 18px;
+}
+.reviews .createdDate {
+  font-weight: 100;
+}
+
+.splide {
+  margin-top: 10px;
+}
+.splide__slide > img {
+  width: 120px;
+  height: 80px;
+}
+
+.commentWritingForm > select {
+  display: block;
+}
