@@ -16,7 +16,11 @@ public class PlaceService {
 		return dao.getPlace(vo);
 	}
 	public List<PlaceVO> getPlaceList(String keywords) {
-		return dao.getPlaceList(keywords);
+		PlaceVO vo = new PlaceVO();
+		keywords = keywords.replaceAll(" ", "|");
+		vo.setTitle(keywords);
+		vo.setAddress(keywords);
+		return dao.getPlaceList(vo);
 	}
 	
 }

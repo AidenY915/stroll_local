@@ -25,13 +25,15 @@ document.addEventListener("DOMContentLoaded", () => {
   body.insertBefore(gnb, body.childNodes[0]);
   body.appendChild(curtain);
   $("#searchBtn").on("click", function () {
-    curtain.style.display = "block";
     $("#gnb>ul>*").not(":first-child").not(":last-child").hide();
     $(this)
       .parent()
       .animate({ right: "+=451px" }, 250, "linear", function () {
         $("#searchInput").show(100).focus();
       });
+  });
+  $("#searchInput").on("focus", function () {
+    curtain.style.display = "block";
   });
   $("#searchInput").on("blur", function () {
     curtain.style.display = "none";
@@ -41,6 +43,11 @@ document.addEventListener("DOMContentLoaded", () => {
         $("#gnb>ul>*").not(":first-child").not(":last-child").show();
       });
     });
+  });
+  $("#searchInput").on("keydown", function (event) {
+    if (event.key === "Enter") {
+      location.assign("aroundme?keywords=" + this.value);
+    }
   });
 });
 

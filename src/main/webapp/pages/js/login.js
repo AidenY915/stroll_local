@@ -21,6 +21,9 @@ const showLogInFrame = () => {
 };
 
 const closeLoginFrame = function (e) {
+  if ($("body").children("#loginFrame").length == 0) {
+    return;
+  }
   if ($(loginFrame).has(e.target).length === 0 && e.target !== loginFrame) {
     $(loginFrame).detach();
     $(loginFrame).find('input[type="text"]').val("");
