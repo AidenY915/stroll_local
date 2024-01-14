@@ -6,9 +6,9 @@ loginFrame.innerHTML = `
       <p>산책갈까</p>
     </div>
     <p>Log in</p>
-    <form>
-    <input type='text'>
-    <input type='password'>
+    <form method = "post" action = "login">
+    <input type='text' name='id'/>
+    <input type='password' name='password'/>
     <button>로그인</button>
     </form>
 `;

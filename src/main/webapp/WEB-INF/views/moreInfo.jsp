@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>더보기</title>
     <link rel="icon" href="pages/images/favicon.png" />
-    <link rel="stylesheet" href="pages/css/gnb.css" />
     <link rel="stylesheet" href="pages/css/frameCss.css" />
     <link rel="stylesheet" href="pages/css/login.css" />
     <link rel="stylesheet" href="pages/css/moreInfo/moreInfo.css" />
@@ -21,7 +20,6 @@
       integrity="sha256-lSjKY0/srUM9BE3dPm+c4fBo1dky2v27Gdjm2uoZaL0="
       crossorigin="anonymous"
     ></script>
-    <script src="pages/js/gnb.js"></script>
     <script src="pages/js/footer.js"></script>
     <script src="pages/js/login.js"></script>
     <script src="pages/js/moreInfo/moreInfo.js"></script>
@@ -29,6 +27,7 @@
     <script src="pages/js/moreInfo/faq.js"></script>
   </head>
   <body>
+  <%@include file = "gnb.jsp"%>
     <header>
       <div class="container">
         <h1>공지사항</h1>

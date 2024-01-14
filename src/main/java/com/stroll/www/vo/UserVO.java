@@ -1,10 +1,14 @@
 package com.stroll.www.vo;
 
-public class UserVO {
+import java.io.Serializable;
+
+public class UserVO implements Serializable{
+	private static final long serialVersionUID = -8799908554156269389L;
 	private String id;
 	private String password;
 	private String nickname;
 	private String email;
+	public UserVO() {}
 	public String getId() {
 		return id;
 	}
@@ -28,5 +32,9 @@ public class UserVO {
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	@Override
+	public String toString() {
+		return "{id = " + id + ", password = " + password + " }";
 	}
 }

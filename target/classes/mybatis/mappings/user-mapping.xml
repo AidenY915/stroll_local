@@ -2,8 +2,8 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="place">
-	<select id = "checkPassword" resultType="place">
-		SELECT id FROM PLACE WHERE ID = #{id} AND PASSWORD = #{password}
+<mapper namespace="user">
+	<select id = "checkPassword" resultType="user">
+		SELECT id FROM USER WHERE ID = #{id} AND PASSWORD = #{password}
 	</select>
 </mapper>

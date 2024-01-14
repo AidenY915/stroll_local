@@ -1,8 +1,11 @@
 package com.stroll.www.vo;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
-public class PlaceVO {
+public class PlaceVO implements Serializable{
+	private static final long serialVersionUID = 7766196491054550097L;
+
 	public PlaceVO(){}
 	private int no;
 	private String title;

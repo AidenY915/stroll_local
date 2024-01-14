@@ -8,7 +8,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="pages/images/favicon.png">
     <title>내 주변</title>
-    <link rel="stylesheet" href="pages/css/gnb.css" />
     <link rel="stylesheet" href="pages/css/aroundme/aroundme.css" />
     <link rel="stylesheet" href="pages/css/frameCss.css" />
     <link rel="stylesheet" href="pages/css/aroundme/slider.css" />
@@ -36,7 +35,6 @@
       src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=5ae67ad4df34ce73bc2c557dd4b55779&libraries=services"
     ></script>
 
-    <script src="pages/js/gnb.js"></script>
     <script src="pages/js/footer.js"></script>
     <script src="pages/js/aroundme/addResultContents.js"></script>
     <script src="pages/js/aroundme/slider.js"></script>
@@ -45,6 +43,7 @@
     <script src="pages/js/aroundme/kakaoMap.js"></script>
   </head>
   <body>
+  <%@include file = "gnb.jsp"%>
     <header>
       <div class="container">
         <h1>내 주변</h1>

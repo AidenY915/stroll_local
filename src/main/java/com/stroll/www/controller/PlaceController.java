@@ -11,17 +11,21 @@ import com.stroll.www.vo.PlaceVO;
 @Controller
 public class PlaceController {
 	@Autowired
-	private PlaceService service;
+	private PlaceService placeService;
+	@Autowired
+	private ReplyService replyService;
 	
 	@RequestMapping("/aroundme")
-	public String showAroundme(@RequestParam(name = "keywords", defaultValue = "", required = false) String keywords, Model model) {
-		model.addAttribute("places", service.getPlaceList(keywords));
+	public String showAroundme(@RequestParam(name = "keywords", defaultValue = "", required = false) String keywords,
+			Model model) {
+		model.addAttribute("places", placeService.getPlaceList(keywords));
 		return "aroundme";
 	}
-	
+
 	@RequestMapping("/detail")
-	public String showDetail(PlaceVO vo, Model model){
-		model.addAttribute("place", service.getPlace(vo));
+	public String showDetail(PlaceVO vo, Model model) {
+		model.addAttribute("place", placeService.getPlace(vo));
+		model.addAttribute("replies", replyService.selectReplies(vo));
 		return "detail";
 	}
 }

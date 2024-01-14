@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="reply">
+	<insert id = "insertReply" parameterType="reply">
+		INSERT INTO REPLY(USERID, PLACENO, CONTENT, STAR) VALUE(#{userId}, #{placeNo}, #{content}, #{star})
+	</insert>
+	<select id = "selectReplies" parameterType="place" resultType="reply">
+		SELECT NO, USERID, NICKNAME AS USERNICKNAME, CONTENT, STAR, WRITTENDATE FROM REPLY INNER JOIN USER ON REPLY.USERID = USER.ID WHERE PLACENO = #{no}  
+	</select>
+</mapper>
