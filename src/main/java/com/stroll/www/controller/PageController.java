@@ -15,4 +15,8 @@ public class PageController {
 	public String showMoreInfo() {
 		return "moreInfo";	
 	}
+	@RequestMapping("/gnb")
+	public String showGnb() {
+		return "gnb";	
+	}
 }
