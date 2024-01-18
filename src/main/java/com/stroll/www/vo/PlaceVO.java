@@ -3,66 +3,96 @@ package com.stroll.www.vo;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
-public class PlaceVO implements Serializable{
+public class PlaceVO implements Serializable {
 	private static final long serialVersionUID = 7766196491054550097L;
 
-	public PlaceVO(){}
+	public PlaceVO() {
+	}
+
 	private int no;
 	private String title;
 	private String content;
+	private String category;
 	private Timestamp writtenDate;
 	private String address;
 	private String detailAddress;
 	private double x;
 	private double y;
-	
+
 	public int getNo() {
 		return no;
 	}
+
 	public void setNo(int no) {
 		this.no = no;
 	}
+
 	public String getTitle() {
 		return title;
 	}
+
 	public void setTitle(String title) {
 		this.title = title;
 	}
+
 	public String getContent() {
 		return content;
 	}
+
 	public void setContent(String content) {
 		this.content = content;
 	}
+	
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
 	public Timestamp getWrittenDate() {
 		return writtenDate;
 	}
+
 	public void setWrittenDate(Timestamp writtenDate) {
 		this.writtenDate = writtenDate;
 	}
+
 	public String getAddress() {
 		return address;
 	}
+
 	public void setAddress(String address) {
 		this.address = address;
 	}
+
 	public String getDetailAddress() {
 		return detailAddress;
 	}
+
 	public void setDetailAddress(String detailAddress) {
 		this.detailAddress = detailAddress;
 	}
+
 	public double getX() {
 		return x;
 	}
+
 	public void setX(double x) {
 		this.x = x;
 	}
+
 	public double getY() {
 		return y;
 	}
+
 	public void setY(double y) {
 		this.y = y;
 	}
-	
+
+	public String toString() {
+		return "{no:" + no +", title:" + title + ", content:" + content + ", writtenDate:" + writtenDate + ", address:" + address + ", detailAddress:" + detailAddress + "}";
+	}
+
 }

@@ -8,7 +8,6 @@
     <title>더보기</title>
     <link rel="icon" href="pages/images/favicon.png" />
     <link rel="stylesheet" href="pages/css/frameCss.css" />
-    <link rel="stylesheet" href="pages/css/login.css" />
     <link rel="stylesheet" href="pages/css/moreInfo/moreInfo.css" />
     <script
       src="https://code.jquery.com/jquery-3.7.1.min.js"
@@ -21,7 +20,6 @@
       crossorigin="anonymous"
     ></script>
     <script src="pages/js/footer.js"></script>
-    <script src="pages/js/login.js"></script>
     <script src="pages/js/moreInfo/moreInfo.js"></script>
     <script src="pages/js/moreInfo/notice.js"></script>
     <script src="pages/js/moreInfo/faq.js"></script>

@@ -9,8 +9,8 @@ CREATE TABLE place(
     writtenDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     address CHAR(80) NOT NULL,
     detailAddress VARCHAR(80),
-    x DECIMAL(8,6) NOT NULL,
-    y DECIMAL(9,6) NOT NULL
+    x double NOT NULL,
+    y double NOT NULL
 );
 
 DROP TABLE IF EXISTS user;
@@ -23,7 +23,7 @@ CREATE TABLE user(
 
 DROP TABLE IF EXISTS reply;
 CREATE TABLE reply(
-	no INT PRIMARY KEY AUTO_INCREMENT,
+	no INT PRIMARY KEY AUTO_INCreplyplaceREMENT,
 	userId CHAR(20) NOT NULL,
     placeNo int NOT NULL,
     content TEXT(500),

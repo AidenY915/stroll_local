@@ -15,12 +15,11 @@ public class ReplyService {
 	private ReplyDAO dao;
 
 	public void insertReply(ReplyVO vo) {
+		System.out.println(vo);
 		dao.insertReply(vo);
 	}
 
 	public List<ReplyVO> selectReplies(PlaceVO vo) {
-		List<ReplyVO> rsltReplies = dao.selectReplies(vo);
-		System.out.println(rsltReplies);
-		return rsltReplies;
+		return dao.selectReplies(vo);
 	}
 }

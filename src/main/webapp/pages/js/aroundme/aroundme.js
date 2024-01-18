@@ -11,6 +11,7 @@ const clickLi = function () {
     $lastClickedOrderBy = $(this);
   }
   $(this).css("color", "#ff5f55");
+  document.research.category.value = this.innerText;
 };
 
 const closeMap = function (e) {

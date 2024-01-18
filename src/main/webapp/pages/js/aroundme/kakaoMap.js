@@ -25,9 +25,14 @@ kakao.maps.event.addListener(map, "click", function (mouseEvent) {
       var detailAddr = !!result[0].road_address
         ? "<div>도로명주소 : " + result[0].road_address.address_name + "</div>"
         : "";
-      detailAddr += "<div>지번 주소 : " + result[0].address.address_name + "</div>";
+      detailAddr +=
+        "<div>지번 주소 : " + result[0].address.address_name + "</div>";
 
-      var content = '<div class="bAddr">' + '<span class="title">법정동 주소정보</span>' + detailAddr + "</div>";
+      var content =
+        '<div class="bAddr">' +
+        '<span class="title">법정동 주소정보</span>' +
+        detailAddr +
+        "</div>";
 
       // 마커를 클릭한 위치에 표시합니다
       marker.setPosition(mouseEvent.latLng);
@@ -36,7 +41,15 @@ kakao.maps.event.addListener(map, "click", function (mouseEvent) {
       // 인포윈도우에 클릭한 위치에 대한 법정동 상세 주소정보를 표시합니다
       infowindow.setContent(content);
       infowindow.open(map, marker);
-      console.log(detailAddr);
+      let guAddress = detailAddr;
+      console.log(guAddress);
+      const endIndex = guAddress.indexOf("구");
+      const startIndex = guAddress.indexOf(":");
+      if (endIndex == -1 || startIndex == -1) return;
+      guAddress = guAddress.substring(startIndex + 2, endIndex + 1);
+      console.log(document.getElementById("myLocation"));
+      document.getElementById("myLocation").innerText = guAddress;
+      document.research.address.value=guAddress;
     }
   });
 });
@@ -58,13 +71,33 @@ function displayCenterInfo(result, status) {
 
     for (var i = 0; i < result.length; i++) {
       // 행정동의 region_type 값은 'H' 이므로
-      if (result[i].region_type === "H") {
+      if (result[i].region_type === "H" && infoDiv !== null) {
         infoDiv.innerHTML = result[i].address_name;
         break;
       }
     }
   }
 }
+
+let x;
+let y;
+
+//클릭 시 위도 경도 뽑기
+kakao.maps.event.addListener(map, "click", function (mouseEvent) {
+  // 클릭한 위도, 경도 정보를 가져옵니다
+  var latlng = mouseEvent.latLng;
+
+  // 마커 위치를 클릭한 위치로 옮깁니다
+  marker.setPosition(latlng);
+
+  var message = "클릭한 위치의 위도는 " + latlng.getLat() + " 이고, ";
+  message += "경도는 " + latlng.getLng() + " 입니다";
+  y = latlng.getLat();
+  x = latlng.getLng();
+  document.research.x.value=x;
+  document.research.y.value=y;
+  console.log(message);
+});
 
 document.addEventListener("DOMContentLoaded", () => {
   document.querySelector("body").appendChild(mapContainer);

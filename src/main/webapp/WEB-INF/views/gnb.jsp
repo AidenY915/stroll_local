@@ -7,7 +7,10 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="pages/css/gnb.css" />
+<link rel="stylesheet" href="pages/css/login.css" />
+
 <script src="pages/js/gnb.js"></script>
+<script src="pages/js/login.js"></script>
 </head>
 <body>
 	<script>

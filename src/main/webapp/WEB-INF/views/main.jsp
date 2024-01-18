@@ -10,7 +10,6 @@
  <!--   <link rel="stylesheet" href="pages/css/gnb.css" /> -->
     <link rel = 'stylesheet' href = 'pages/css/frameCss.css'>
     <link rel="stylesheet" href="pages/css/main/main.css" />
-    <link rel ='stylesheet' href='pages/css/login.css'>
     <!-- splider -->
     <link
       href="
@@ -32,7 +31,6 @@ https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css
 https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js
 "></script>
     <!--<script src="pages/js/gnb.js"></script>-->
-    <script src = 'pages/js/login.js'></script>
     <script src="pages/js/footer.js"></script>
     <script src = 'pages/js/main/slideBanner.js'></script>
   </head>

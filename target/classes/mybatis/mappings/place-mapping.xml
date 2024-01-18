@@ -3,13 +3,26 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="place">
-	<select id = "selectPlaces" parameterType="place" resultType="place">
-		SELECT * FROM PLACE 
-		<if test='!title.equals("")'> 
-		WHERE TITLE REGEXP #{title} or ADDRESS REGEXP #{address} or DETAILADDRESS REGEXP #{address}
-		</if>
+	<select id="selectPlaces" parameterType="place"
+		resultType="place">
+		SELECT * FROM PLACE
+		WHERE TITLE REGEXP #{title} or ADDRESS REGEXP #{address} or DETAILADDRESS
+		REGEXP #{detailAddress}
 	</select>
-	<select id = "selectPlace" parameterType="place" resultType="place">
+	<select id="selectPlacesByAddress" parameterType="place"
+		resultType="place">
+		SELECT * FROM PLACE
+		WHERE ADDRESS REGEXP #{address} and (TITLE REGEXP #{title} or DETAILADDRESS
+		REGEXP #{detailAddress})
+
+	</select>
+	<select id="selectPlace" parameterType="place"
+		resultType="place">
 		SELECT * FROM PLACE WHERE no = #{no}
-	</select>	
+	</select>
+	<insert id="insertPlace" parameterType="place">
+		INSERT INTO PLACE(TITLE,
+		CONTENT, CATEGORY, ADDRESS, DETAILADDRESS, X, Y) VALUE(#{title},
+		#{content}, #{category}, #{address}, #{detailAddress}, #{x}, #{y})
+	</insert>
 </mapper>

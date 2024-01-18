@@ -16,7 +16,6 @@ https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css
 	rel="stylesheet" />
 <link rel="stylesheet" href="pages/css/frameCss.css" />
 <link rel="stylesheet" href="pages/css/detail/detail.css" />
-<link rel="stylesheet" href="pages/css/login/login.css" />
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"
 	integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
@@ -31,7 +30,6 @@ https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css
 https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js
 "></script>
 <script src="pages/js/footer.js"></script>
-<script src="pages/js/login.js"></script>
 <script src="pages/js/detail/splide.js"></script>
 </head>
 <body>
@@ -75,7 +73,7 @@ https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js
 				<c:forEach var="reply" items="${replies}" >
 					<li class='review'>
 						<p class='writer'>${reply.userNickname}</p>
-						<p class='score'>${reply.star}</p>
+						<p class='score'><c:forEach begin="1" end="${reply.star}">★</c:forEach></p>
 						<p class='content'>${reply.content}</p>
 						<p class='createdDate'>${reply.writtenDate}</p>
 					</li>
