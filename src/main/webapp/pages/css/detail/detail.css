@@ -9,6 +9,8 @@
 
 .imgSlider > img {
   width: 490px;
+  height:350px;
+  object-fit: contain;
 }
 .about > * {
   float: left;

@@ -9,6 +9,7 @@ loginFrame.innerHTML = `
     <form method = "post" action = "login">
     <input type='text' name='id'/>
     <input type='password' name='password'/>
+    <input type='hidden' name='path' value='${window.location.pathname}'/>
     <button>로그인</button>
     </form>
 `;

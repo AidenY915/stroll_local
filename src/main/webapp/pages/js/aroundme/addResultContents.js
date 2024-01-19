@@ -24,9 +24,9 @@ const addLi = function (
   resultList.push(li);
 };
 
-for (let i = 1; i <= 10; i++) {
-  addLi(i);
-}
+//for (let i = 1; i <= 10; i++) {
+//  addLi(i);
+//}
 
 document.addEventListener("DOMContentLoaded", () => {
   const resultContentsUl = document.querySelector(".results");

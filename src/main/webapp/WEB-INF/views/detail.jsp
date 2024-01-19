@@ -40,7 +40,11 @@ https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js
 				<img class="displayedImg" />
 				<section class="splide" aria-label="Splide Basic HTML Example">
 					<div class="splide__track">
-						<ul class="splide__list"></ul>
+						<ul class="splide__list">
+							<c:forEach var="img" items="${imgs}">
+								<li class="splide__slide"><img src="${img}" alt="장소 이미지" /></li>
+							</c:forEach>
+						</ul>
 					</div>
 				</section>
 			</div>
@@ -70,10 +74,12 @@ https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js
 				</form>
 			</c:if>
 			<ul class="reviews">
-				<c:forEach var="reply" items="${replies}" >
+				<c:forEach var="reply" items="${replies}">
 					<li class='review'>
 						<p class='writer'>${reply.userNickname}</p>
-						<p class='score'><c:forEach begin="1" end="${reply.star}">★</c:forEach></p>
+						<p class='score'>
+							<c:forEach begin="1" end="${reply.star}">★</c:forEach>
+						</p>
 						<p class='content'>${reply.content}</p>
 						<p class='createdDate'>${reply.writtenDate}</p>
 					</li>

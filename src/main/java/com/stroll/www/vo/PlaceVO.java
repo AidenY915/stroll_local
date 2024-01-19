@@ -18,6 +18,15 @@ public class PlaceVO implements Serializable {
 	private String detailAddress;
 	private double x;
 	private double y;
+	private int distance;
+
+	public int getDistance() {
+		return distance;
+	}
+
+	public void setDistance(int distance) {
+		this.distance = distance;
+	}
 
 	public int getNo() {
 		return no;
@@ -92,7 +101,7 @@ public class PlaceVO implements Serializable {
 	}
 
 	public String toString() {
-		return "{no:" + no +", title:" + title + ", content:" + content + ", writtenDate:" + writtenDate + ", address:" + address + ", detailAddress:" + detailAddress + "}";
+		return "{no:" + no +", title:" + title + ", content:" + content + ", category:" + category + ", writtenDate:" + writtenDate + ", address:" + address + ", detailAddress:" + detailAddress + ", x:" + x + ", y:" + y + "}";
 	}
 
 }

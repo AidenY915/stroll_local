@@ -6,23 +6,28 @@
 	<select id="selectPlaces" parameterType="place"
 		resultType="place">
 		SELECT * FROM PLACE
-		WHERE TITLE REGEXP #{title} or ADDRESS REGEXP #{address} or DETAILADDRESS
+		WHERE TITLE REGEXP #{title} or ADDRESS
+		REGEXP #{address} or DETAILADDRESS
 		REGEXP #{detailAddress}
 	</select>
 	<select id="selectPlacesByAddress" parameterType="place"
 		resultType="place">
 		SELECT * FROM PLACE
-		WHERE ADDRESS REGEXP #{address} and (TITLE REGEXP #{title} or DETAILADDRESS
+		WHERE ADDRESS REGEXP #{address} and (TITLE REGEXP
+		#{title} or DETAILADDRESS
 		REGEXP #{detailAddress})
-
+		<if test='!category.equals("")'> and CATEGORY = #{category}</if>
 	</select>
 	<select id="selectPlace" parameterType="place"
 		resultType="place">
 		SELECT * FROM PLACE WHERE no = #{no}
 	</select>
-	<insert id="insertPlace" parameterType="place">
+	<insert id="insertPlace" parameterType="place"
+		useGeneratedKeys="true" keyProperty="no">
 		INSERT INTO PLACE(TITLE,
-		CONTENT, CATEGORY, ADDRESS, DETAILADDRESS, X, Y) VALUE(#{title},
-		#{content}, #{category}, #{address}, #{detailAddress}, #{x}, #{y})
+		CONTENT,
+		CATEGORY, ADDRESS, DETAILADDRESS, X, Y) VALUE(#{title},
+		#{content},
+		#{category}, #{address}, #{detailAddress}, #{x}, #{y})
 	</insert>
 </mapper>

@@ -6,12 +6,12 @@ const clickLi = function () {
     if ($lastClickedCategory !== undefined)
       $lastClickedCategory.css("color", "");
     $lastClickedCategory = $(this);
+    document.research.category.value = this.dataset.category;
   } else if ($(this).parent().hasClass("orderByUl")) {
     if ($lastClickedOrderBy !== undefined) $lastClickedOrderBy.css("color", "");
     $lastClickedOrderBy = $(this);
   }
   $(this).css("color", "#ff5f55");
-  document.research.category.value = this.innerText;
 };
 
 const closeMap = function (e) {

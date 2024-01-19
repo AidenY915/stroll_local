@@ -1,14 +1,3 @@
-const gnb = document.createElement("section");
-gnb.innerHTML = `<ul>
-<li><a href = 'main'>산책갈까</a></li>
-<li><a onclick = 'showLogInFrame()'>로그인</a></li>
-<li><a href = 'moreInfo'>더보기</a></li>
-<li><a href = '#'>예약내역</a></li>
-<li><a href = 'aroundme'>내 주변</a></li>
-<li><a id ='searchBtn'><img id='searchIcon' src ='pages/images/search_icon.png'></a><input id = "searchInput" type = "search"/></li>
-</ul>`;
-gnb.id = "gnb";
-
 const curtain = document.createElement("div");
 curtain.style.position = "fixed";
 curtain.style.left = "0px";
@@ -20,7 +9,10 @@ curtain.style.opacity = "0.7";
 curtain.style.display = "none";
 curtain.style.backgroundColor = "black";
 
+let gnb;
+
 document.addEventListener("DOMContentLoaded", () => {
+  gnb = document.getElementById("gnb");
   const body = document.querySelector("body");
   body.insertBefore(gnb, body.childNodes[0]);
   body.appendChild(curtain);

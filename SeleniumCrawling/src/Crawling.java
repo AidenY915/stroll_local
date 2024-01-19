@@ -1,3 +1,6 @@
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -48,7 +51,7 @@ class PlaceVO {
 
 		int currentPage = Integer.parseInt(driver.findElement(By.cssSelector("a.mBN2s.qxokY")).getText());
 		System.out.println(currentPage);
-		String nextPageSelector="a.mBN2s.qxokY+a.mBN2s";
+		String nextPageSelector = "a.mBN2s.qxokY+a.mBN2s";
 		try {
 			driver.findElement(By.cssSelector(nextPageSelector)).click();
 		} catch (NoSuchElementException e) {
@@ -114,4 +117,26 @@ public class Crawling {
 		}
 	}
 
+	private void insertIntoDb(List<PlaceVO> datas) {
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+		} catch (ClassNotFoundException e) { // RuntimeException이라 굳이 안해도 되기는 함.
+			e.printStackTrace();
+		}
+		String databaseUrl = "jdbc:mysql://localhost:3306/데이터베이스?serverTimezone=UCT";
+		String DBUser = "root";
+		String DBPassword = "0000";
+		
+		String insertQuery = "INSERT INTO PLACE(TITLE, CONTENT, CATEGORY, ADDRESS, DETAILADDRESS), VALUE(?, ?, ?, ?, ?)"
+		try (Connection conn = DriverManager.getConnection(databaseUrl, DBUser, DBPassword);
+				PreparedStatement insertStmt = conn.prepareStatement(insertQuery);
+				) {
+			for(PlaceVO data : datas) {
+				insertStmt.setString(1, data.title);
+				insertStmt.executeUpdate();
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+	}
 }

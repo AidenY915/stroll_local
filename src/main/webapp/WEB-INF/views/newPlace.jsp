@@ -21,7 +21,7 @@
 		enctype="multipart/form-data">
 		<section class="about">
 			<div class="imgSlider">
-				<input type='file' name='placeImg'> <img
+				<input type='file' name="imgs" multiple accept="image/jpg image/jpeg image/png"/> <img
 					class="displayedImg" />
 				<section class="splide" aria-label="Splide Basic HTML Example">
 					<div class="splide__track">
@@ -35,7 +35,7 @@
 				</h2>
 				<div>
 					카테고리 : <select name="category">
-						<option value="pension">반려견 펜션</option>
+						<option value="pension">펜션</option>
 						<option value="cafe">카페</option>
 						<option value="grooming">미용</option>
 						<option value="hospital">동물병원</option>

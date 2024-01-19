@@ -13,18 +13,26 @@
 <script src="pages/js/login.js"></script>
 </head>
 <body>
-	<script>
-	const logout = function() {
-		location.assign("logout");
-	}
-	
-	$(function() {
-	const $loginA = $('#gnb li:eq(1) > a'); 
-	<c:if test = "${sessionScope.id != null}">
-		$loginA.text("로그아웃");
-		$loginA.attr("onclick", "logout()");
-	</c:if>	
-	});
-</script>
+	<section id="gnb">
+		<ul>
+			<li><a href='main'>산책갈까</a></li>
+			<c:choose>
+				<c:when test="${sessionScope.id == null}">
+					<li><a onclick='showLogInFrame()'>로그인</a></li>
+				</c:when>
+				<c:otherwise>
+					<li><a href="logout">로그아웃</a></li>
+				</c:otherwise>
+			</c:choose>
+			<li><a href='moreInfo'>더보기</a></li>
+			<c:if test="${sessionScope.id != null}">
+				<li><a href='#'>마이페이지</a></li>
+			</c:if>
+			<li><a href='aroundme'>내 주변</a></li>
+			<li><a id='searchBtn'><img id='searchIcon'
+					src='pages/images/search_icon.png'></a><input id="searchInput"
+				type="search" /></li>
+		</ul>
+	</section>
 </body>
 </html>
