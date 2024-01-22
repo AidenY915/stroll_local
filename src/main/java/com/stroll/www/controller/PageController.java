@@ -19,4 +19,12 @@ public class PageController {
 	public String showGnb() {
 		return "gnb";	
 	}
+	@RequestMapping("/newplace")
+	public String showNewPlace() {
+		return "newPlace";
+	}
+	@RequestMapping("/register")
+	public String showRegisterPage() {
+		return "register";
+	}
 }

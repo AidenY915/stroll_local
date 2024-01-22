@@ -14,8 +14,7 @@ CREATE TABLE place(
     userId CHAR(20) NOT NULL,
     CONSTRAINT fk_place_user_id FOREIGN KEY (userId) REFERENCES user(id) ON DELETE CASCADE
 );
-
-
+CREATE INDEX ix_place_userId ON place(userId);
 
 DROP TABLE IF EXISTS user;
 CREATE TABLE user(
@@ -35,3 +34,4 @@ CREATE TABLE reply(
     writtenDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL,
 	CONSTRAINT fk_reply_user_id FOREIGN KEY (userId) REFERENCES user(id) ON DELETE CASCADE
 );
+CREATE INDEX ix_reply_placeNo ON reply(placeNo);

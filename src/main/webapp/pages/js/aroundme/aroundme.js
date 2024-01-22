@@ -10,6 +10,7 @@ const clickLi = function () {
   } else if ($(this).parent().hasClass("orderByUl")) {
     if ($lastClickedOrderBy !== undefined) $lastClickedOrderBy.css("color", "");
     $lastClickedOrderBy = $(this);
+    document.research.order.value = this.dataset.order;
   }
   $(this).css("color", "#ff5f55");
 };
@@ -35,6 +36,15 @@ $(() => {
   $(".categoryUl > li:first-child, .orderByUl > li:first-child").trigger(
     "click"
   );
+  const urlParams = new URLSearchParams(window.location.search);
+  const category = urlParams.get("category");
+  const order = urlParams.get("order");
+  console.log(category);
+  console.log(order);
+  if (category != null)
+    $(`.categoryUl > li[data-category = '${category}']`).trigger("click");
+  if (order != null)
+    $(`.orderByUl > li[data-order = '${order}']`).trigger("click");
 
   appendSlider(".sliderContainer:eq(0)", 0, 30, 1, "km");
   appendSlider(".sliderContainer:eq(1)", 0, 5, 0, "점");

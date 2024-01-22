@@ -51,10 +51,11 @@
 			<li data-category="playground">놀이터</li>
 			<li data-category="kindergarden">유치원</li>
 			<c:if test="${id!=null}">
-			<button id="addNewPlaceBtn" onclick=location.assign("newplace");>새 장소 등록</button>
-			</c:if>	
+				<button id="addNewPlaceBtn" onclick=location.assign("newplace");>새
+					장소 등록</button>
+			</c:if>
 		</ul>
-		
+
 		<aside class="sideFilter">
 			<form method="get" action="aroundme" name="research">
 				<div class="distanceFilter">
@@ -72,6 +73,7 @@
 				<input type="hidden" name="keywords" value="${param.keywords}" /> <input
 					type="hidden" name="address" value="${param.address}" /> <input
 					type="hidden" name="category" value="${param.category}" /> <input
+					type="hidden" name="order" value="${param.order}" /> <input
 					type="hidden" name="x" value="${param.x == null ? 0 : param.x}" />
 				<input type="hidden" name="y"
 					value="${param.y == null ? 0 : param.y}" />
@@ -80,18 +82,23 @@
 		</aside>
 		<section class="resultContents">
 			<ul class="orderByUl">
-				<li>거리 순</li>
-				<li>별점 순</li>
-				<li>리뷰 순</li>
+				<li data-order="distance">거리 순</li>
+				<li data-order="star">별점 순</li>
+				<li data-order="review">리뷰 순</li>
 			</ul>
 			<ul class="results">
 				<c:forEach var="place" items="${places}">
 					<li><a href='detail?no=${place.no}'> <img class="placeImg"
 							src="resources/upload/imgs/${place.no}_1.jpg" onerror=this.src="http://placehold.it/180x240">
 							<div>
-								<p><span class="placeName">${place.title}</span> <c:if test="${param.x != null}"><span class="distance">${place.distance}m</span></c:if></p>
-								<p>${place.address} ${place.detailAddress}</p>
-								<p class="star">별 수</p>
+								<p>
+									<span class="placeName">${place.title}</span>
+									<c:if test="${param.x != null && param.x!=0}">
+										<span class="distance">${place.distance}m</span>
+									</c:if>
+								</p>
+								<p>${place.address}${place.detailAddress}</p>
+								<p class="star">★ ${place.star}</p>
 							</div>
 					</a></li>
 				</c:forEach>

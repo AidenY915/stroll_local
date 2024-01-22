@@ -1,5 +1,7 @@
 package com.stroll.www.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,11 +19,16 @@ public class PlaceController {
 	private PlaceService placeService;
 	@Autowired
 	private ReplyService replyService;
-	
+
 	@RequestMapping("/aroundme")
-	public String showAroundme(@RequestParam(name = "keywords", defaultValue = "", required = false) String keywords,
-			PlaceVO vo, Model model) {
-		model.addAttribute("places", placeService.getPlaceList(vo ,keywords));
+	public String showAroundme(PlaceVO vo, Model model, HttpServletRequest request) {
+		String keywords = request.getParameter("keywords");
+		String order = request.getParameter("order");
+		String pageStr = request.getParameter("page");
+		if(keywords == null) keywords = "";
+		if(order == null) order = "distance";
+		int page = pageStr == null ? 1 : Integer.parseInt(pageStr);
+		model.addAttribute("places", placeService.getPlaceList(vo, keywords, order, page));
 		return "aroundme";
 	}
 
@@ -32,13 +39,9 @@ public class PlaceController {
 		model.addAttribute("replies", replyService.selectReplies(vo));
 		return "detail";
 	}
-	
-	@RequestMapping("/newplace")
-	public String showNewPlace() {
-		return "newPlace";
-	}
+
 	@RequestMapping(value = "/insertPlace", method = RequestMethod.POST)
-	public String insertPlace(@RequestParam("imgs") MultipartFile[] imgs ,PlaceVO vo, RedirectAttributes redirect) {
+	public String insertPlace(@RequestParam("imgs") MultipartFile[] imgs, PlaceVO vo, RedirectAttributes redirect) {
 		System.out.println(vo);
 		System.out.println("insertPlace입장");
 		redirect.addAttribute("no", placeService.insertPlace(vo, imgs));

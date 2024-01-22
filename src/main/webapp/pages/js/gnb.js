@@ -13,14 +13,18 @@ let gnb;
 
 document.addEventListener("DOMContentLoaded", () => {
   gnb = document.getElementById("gnb");
+  let btnLiInitialPos = window
+    .getComputedStyle(document.querySelector("#gnb > ul > li:last-child"))
+    .getPropertyValue("left");
   const body = document.querySelector("body");
   body.insertBefore(gnb, body.childNodes[0]);
   body.appendChild(curtain);
   $("#searchBtn").on("click", function () {
+    console.log(btnLiInitialPos);
     $("#gnb>ul>*").not(":first-child").not(":last-child").hide();
     $(this)
       .parent()
-      .animate({ right: "+=451px" }, 250, "linear", function () {
+      .animate({ left: "200px" }, 250, "linear", function () {
         $("#searchInput").show(100).focus();
       });
   });
@@ -31,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
     curtain.style.display = "none";
     const $btnLi = $(this).parent();
     $("#searchInput").hide(0, "linear", () => {
-      $btnLi.animate({ right: "-=451px" }, 250, "linear", function () {
+      $btnLi.animate({ left: btnLiInitialPos }, 250, "linear", function () {
         $("#gnb>ul>*").not(":first-child").not(":last-child").show();
       });
     });

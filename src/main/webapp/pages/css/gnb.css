@@ -53,6 +53,11 @@
   position: absolute;
   right: 324px;
 }
+
+#gnb > ul > li:last-child:nth-child(5) {
+  right: 240px;
+}
+
 #gnb > ul > li:last-child > input {
   position: relative;
   left: 50px;

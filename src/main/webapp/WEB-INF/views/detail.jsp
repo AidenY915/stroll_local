@@ -50,7 +50,7 @@ https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js
 			</div>
 			<article>
 				<h2>${place.title}</h2>
-				<p>별점</p>
+				<p>★ ${place.star}</p>
 				<p>
 					<span>${place.address} ${place.detailAddress}</span>
 				</p>

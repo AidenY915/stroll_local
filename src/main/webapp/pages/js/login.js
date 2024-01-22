@@ -9,8 +9,9 @@ loginFrame.innerHTML = `
     <form method = "post" action = "login">
     <input type='text' name='id'/>
     <input type='password' name='password'/>
-    <input type='hidden' name='path' value='${window.location.pathname}'/>
+    <input type='hidden' name='path' value='${window.location.pathname}${window.location.search}'/>
     <button>로그인</button>
+    <a id="registerLink" href="register">회원가입</a>
     </form>
 `;
 loginFrame.style.zIndex = "51";

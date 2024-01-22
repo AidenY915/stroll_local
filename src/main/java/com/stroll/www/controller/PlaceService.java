@@ -12,6 +12,7 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,39 +26,43 @@ import com.stroll.www.vo.PlaceVO;
 public class PlaceService {
 	@Autowired
 	private PlaceDAO dao;
+	private final static int PAGE_SIZE = 10;
 
 	public PlaceVO getPlace(PlaceVO vo) {
-		
-		return dao.getPlace(vo);
+		vo = dao.getPlace(vo);
+		vo.setStar(Math.round(vo.getStar() * 10) / 10.0f);
+		return vo;
 	}
 
-	public List<PlaceVO> getPlaceList(PlaceVO vo, String keywords) {
-		List<PlaceVO> resultList = null;
-		System.out.println("service.getPlaceList 호출됨.");
+	public List<PlaceVO> getPlaceList(PlaceVO vo, String keywords, String order, int page) {
+		List<PlaceVO> listFromDb = null;
 		keywords = keywords.replaceAll(" ", "|");
 		if (keywords.equals(""))
 			keywords = ".*";
 		vo.setTitle(keywords);
 		vo.setDetailAddress(keywords);
-		if(vo.getCategory() == null)
+		if (vo.getCategory() == null)
 			vo.setCategory("");
-		if (vo.getAddress() == null || vo.getAddress().equals(""))
-		{
+		if (vo.getAddress() == null || vo.getAddress().equals("")) {
 			vo.setAddress(keywords);
-			resultList = dao.getPlaceList(vo);
-		}
-		else {
+			listFromDb = dao.getPlaceList(vo);
+		} else {
 			String addressRegex = vo.getAddress().replaceAll("(특별시|광역시|시)", "[가-힣]{0,3}").replaceAll("^[가-힣]+도", "");
 			vo.setAddress(addressRegex);
-			System.out.println(vo);
-			resultList = dao.getPlaceListByAddress(vo);
+			listFromDb = dao.getPlaceListByAddress(vo);
 		}
-		for(PlaceVO place : resultList) {
-			System.out.println("x : " + place.getX() + " y : " + place.getY());
-			place.setDistance((int)Math.pow(((Math.pow(place.getX()*1849 - vo.getX()*1849,2)+Math.pow(place.getY()*110940 - vo.getY()*110940,2))),0.5));
+		for (PlaceVO place : listFromDb) {
+			place.setDistance((int) Math.pow(((Math.pow(place.getX() * 1849 - vo.getX() * 1849, 2)
+					+ Math.pow(place.getY() * 110940 - vo.getY() * 110940, 2))), 0.5));
+			place.setStar(Math.round(place.getStar() * 10) / 10.0f);
 		}
-		sortPlaces(resultList);
-		return resultList;
+		sortPlaces(listFromDb, order);
+		List<PlaceVO> rsltList = new LinkedList<>();
+		for (int i = (page - 1) * PAGE_SIZE; i < (page) * PAGE_SIZE; i++) {
+			rsltList.add(listFromDb.get(i));
+			System.out.println(i);
+		}
+		return rsltList;
 	}
 
 	public int insertPlace(PlaceVO vo, MultipartFile[] imgs) {
@@ -117,8 +122,10 @@ public class PlaceService {
 			if (imgs[i].isEmpty())
 				break;
 			try {
-				//String extension = imgs[i].getOriginalFilename().split("\\.")[1]; jpg로 통일
-				imgs[i].transferTo(new File("C:\\Users\\Aiden\\Documents\\Codes\\SPRING\\stroll\\src\\main\\webapp\\resources\\upload\\imgs\\" + vo.getNo() + "_" + (i + 1) + "." + "jpg"));
+				// String extension = imgs[i].getOriginalFilename().split("\\.")[1]; jpg로 통일
+				imgs[i].transferTo(new File(
+						"C:\\Users\\Aiden\\Documents\\Codes\\SPRING\\stroll\\src\\main\\webapp\\resources\\upload\\imgs\\"
+								+ vo.getNo() + "_" + (i + 1) + "." + "jpg"));
 			} catch (IllegalStateException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
@@ -129,25 +136,36 @@ public class PlaceService {
 	}
 
 	public List<String> getImgs(PlaceVO vo) {
-		File dir = new File("C:\\Users\\Aiden\\Documents\\Codes\\SPRING\\stroll\\src\\main\\webapp\\resources\\upload\\imgs\\");
-        String []fileNames = dir.list(); //자동 이름 순 정렬
-        if(fileNames == null) {
-            return null;
-        }
-        List<String> rslt = new ArrayList<>(fileNames.length);
-        boolean endFlag = false;
-        for(String fileName : fileNames) {
-        	System.out.println(fileName);
-        	if(fileName.split("_")[0].equals(""+vo.getNo())) {
-        		rslt.add("resources/upload/imgs/"+fileName);
-        		endFlag = true;
-        	}else if(endFlag) break;
-        }
-        System.out.println(rslt);
+		File dir = new File(
+				"C:\\Users\\Aiden\\Documents\\Codes\\SPRING\\stroll\\src\\main\\webapp\\resources\\upload\\imgs\\");
+		String[] fileNames = dir.list(); // 자동 이름 순 정렬
+		if (fileNames == null) {
+			return null;
+		}
+		List<String> rslt = new ArrayList<>(fileNames.length);
+		boolean endFlag = false;
+		for (String fileName : fileNames) {
+			System.out.println(fileName);
+			if (fileName.split("_")[0].equals("" + vo.getNo())) {
+				rslt.add("resources/upload/imgs/" + fileName);
+				endFlag = true;
+			} else if (endFlag)
+				break;
+		}
+		System.out.println(rslt);
 		return rslt;
 	}
-	
-	private void sortPlaces(List<PlaceVO> placeList) {
-		Collections.sort(placeList, (p1, p2)-> (p1.getDistance()-p2.getDistance()));
+
+	private void sortPlaces(List<PlaceVO> placeList, String order) {
+		switch (order) {
+		case "distance":
+			Collections.sort(placeList, (p1, p2) -> (p1.getDistance() - p2.getDistance()));
+			break;
+		case "star":
+			Collections.sort(placeList, (p1, p2) -> ((int) (p2.getStar() - p1.getStar() * 10)));
+			break;
+		case "review":
+			break;
+		}
 	}
 }

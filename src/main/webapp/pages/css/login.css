@@ -28,6 +28,7 @@
 }
 #loginFrame > form {
   margin-top: 20px;
+  text-align: center;
 }
 #loginFrame > p {
   text-align: center;
@@ -56,4 +57,9 @@
   color: white;
   background-color: #ff5f55;
   box-shadow: 1px 1px 3px #aaa;
+}
+
+#registerLink{
+	color:background-color: #ff5f55;
+	text-decoration: none;
 }

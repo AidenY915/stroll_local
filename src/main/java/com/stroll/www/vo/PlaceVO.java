@@ -19,6 +19,7 @@ public class PlaceVO implements Serializable {
 	private double x;
 	private double y;
 	private int distance;
+	private float star;
 
 	public int getDistance() {
 		return distance;
@@ -98,6 +99,14 @@ public class PlaceVO implements Serializable {
 
 	public void setY(double y) {
 		this.y = y;
+	}
+	
+	public float getStar() {
+		return star;
+	}
+
+	public void setStar(float star) {
+		this.star = star;
 	}
 
 	public String toString() {
