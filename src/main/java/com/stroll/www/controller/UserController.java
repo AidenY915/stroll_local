@@ -1,6 +1,10 @@
 package com.stroll.www.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,5 +36,20 @@ public class UserController {
 	public String logout(HttpServletRequest request) {
 		request.getSession().invalidate();
 		return "redirect:/";
+	}
+	@RequestMapping(value = "/registerOK")
+	public String register(UserVO vo) {
+		System.out.println("<register 컨트롤러>");
+		service.registerUser(vo);
+		return "redirect:/";
+	}
+	@RequestMapping(value = "idDuplicateCheck")
+	public void idDuplicateCheck(UserVO vo, HttpServletResponse response) {
+		try(PrintWriter out = response.getWriter()) {
+			service.idDuplicateCheck(vo, out);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return;
 	}
 }

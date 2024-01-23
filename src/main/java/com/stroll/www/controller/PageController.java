@@ -1,5 +1,7 @@
 package com.stroll.www.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -26,5 +28,10 @@ public class PageController {
 	@RequestMapping("/register")
 	public String showRegisterPage() {
 		return "register";
+	}
+	@RequestMapping("/mypage")
+	public String showMyPage(HttpSession session) {
+		if(session.getAttribute("id") == null) return "redirect:/";
+		return "myPage";
 	}
 }

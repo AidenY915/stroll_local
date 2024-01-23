@@ -9,4 +9,7 @@
 	<select id = "selectReplies" parameterType="place" resultType="reply">
 		SELECT NO, USERID, NICKNAME AS USERNICKNAME, CONTENT, STAR, WRITTENDATE FROM REPLY INNER JOIN USER ON REPLY.USERID = USER.ID WHERE PLACENO = #{no}  
 	</select>
+	<delete id = "deleteReply" parameterType="reply">
+		DELETE FROM REPLY WHERE NO = #{no} AND USERID = #{userId}
+	</delete>
 </mapper>

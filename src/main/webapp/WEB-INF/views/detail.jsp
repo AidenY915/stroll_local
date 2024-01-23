@@ -82,6 +82,11 @@ https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js
 						</p>
 						<p class='content'>${reply.content}</p>
 						<p class='createdDate'>${reply.writtenDate}</p>
+						<c:if test="${reply.userId == sessionScope.id}">
+							<a href = "deleteReply?no=${reply.no}&placeNo=${param.no}">
+								<button>삭제</button>
+							</a>
+						</c:if>
 					</li>
 				</c:forEach>
 			</ul>

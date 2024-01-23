@@ -60,6 +60,10 @@
 }
 
 #registerLink{
+	display:inline-block;
 	color:background-color: #ff5f55;
 	text-decoration: none;
+	color:#ff5f55;
+	opacity : 0.8;
+	margin-top:5px;
 }

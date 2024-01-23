@@ -25,10 +25,17 @@ public class PlaceController {
 		String keywords = request.getParameter("keywords");
 		String order = request.getParameter("order");
 		String pageStr = request.getParameter("page");
-		if(keywords == null) keywords = "";
-		if(order == null) order = "distance";
+		if (keywords == null)
+			keywords = "";
+		if (order == null)
+			order = "distance";
 		int page = pageStr == null ? 1 : Integer.parseInt(pageStr);
-		model.addAttribute("places", placeService.getPlaceList(vo, keywords, order, page));
+		model.addAttribute("places", placeService.getPlaceList(vo, keywords, order, page, request));
+		int numOfPages = (Integer) request.getAttribute("numOfPages");
+		int firstPage = page - 4 >= 1 ? page - 4 : 1;
+		int lastPage = firstPage + 8 <= numOfPages ? firstPage + 8 : numOfPages;
+		model.addAttribute("firstPage", firstPage);
+		model.addAttribute("lastPage", lastPage);
 		return "aroundme";
 	}
 

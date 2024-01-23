@@ -15,6 +15,8 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -34,7 +36,7 @@ public class PlaceService {
 		return vo;
 	}
 
-	public List<PlaceVO> getPlaceList(PlaceVO vo, String keywords, String order, int page) {
+	public List<PlaceVO> getPlaceList(PlaceVO vo, String keywords, String order, int page, HttpServletRequest request) {
 		List<PlaceVO> listFromDb = null;
 		keywords = keywords.replaceAll(" ", "|");
 		if (keywords.equals(""))
@@ -56,11 +58,11 @@ public class PlaceService {
 					+ Math.pow(place.getY() * 110940 - vo.getY() * 110940, 2))), 0.5));
 			place.setStar(Math.round(place.getStar() * 10) / 10.0f);
 		}
+		request.setAttribute("numOfPages", (int)Math.ceil(listFromDb.size()/(double)PAGE_SIZE));
 		sortPlaces(listFromDb, order);
 		List<PlaceVO> rsltList = new LinkedList<>();
-		for (int i = (page - 1) * PAGE_SIZE; i < (page) * PAGE_SIZE; i++) {
+		for (int i = (page - 1) * PAGE_SIZE; i < (page) * PAGE_SIZE && i < listFromDb.size(); i++) {
 			rsltList.add(listFromDb.get(i));
-			System.out.println(i);
 		}
 		return rsltList;
 	}

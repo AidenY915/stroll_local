@@ -1,5 +1,7 @@
 package com.stroll.www.controller;
 
+import java.io.PrintWriter;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,5 +21,19 @@ public class UserService {
 	
 	public String login(UserVO vo) {
 		return checkPassword(vo);
+	}
+
+	public void registerUser(UserVO vo) {
+		dao.registerUser(vo);
+	}
+
+	public void idDuplicateCheck(UserVO vo, PrintWriter out) {
+		vo = dao.selectUser(vo);
+		if(vo == null) {
+			out.print("true");
+		}else {
+			out.print("false");
+		}
+		return;	
 	}
 }

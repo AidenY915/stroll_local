@@ -29,4 +29,11 @@ public class ReplyController {
 		System.out.println("댓글 등록 서비스 끝");
 		return "redirect:detail";
 	}
+	@RequestMapping(value="/deleteReply")
+	public String delete(ReplyVO vo, HttpSession session, RedirectAttributes redirectAttr) {
+		vo.setUserId((String)session.getAttribute("id"));
+		redirectAttr.addAttribute("no", vo.getPlaceNo());
+		service.deleteReply(vo);
+		return "redirect:detail";
+	}
 }

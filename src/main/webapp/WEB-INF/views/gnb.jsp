@@ -26,7 +26,7 @@
 			</c:choose>
 			<li><a href='moreInfo'>더보기</a></li>
 			<c:if test="${sessionScope.id != null}">
-				<li><a href='#'>마이페이지</a></li>
+				<li><a href='mypage'>마이페이지</a></li>
 			</c:if>
 			<li><a href='aroundme'>내 주변</a></li>
 			<li><a id='searchBtn'><img id='searchIcon'

@@ -21,4 +21,8 @@ public class ReplyDAO {
 	public List<ReplyVO> selectReplies(PlaceVO vo) {
 		return mybatis.selectList("reply.selectReplies", vo);		
 	}
+
+	public void deleteReply(ReplyVO vo) {
+		mybatis.delete("reply.deleteReply", vo);
+	}
 }

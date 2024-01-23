@@ -22,4 +22,9 @@ public class ReplyService {
 	public List<ReplyVO> selectReplies(PlaceVO vo) {
 		return dao.selectReplies(vo);
 	}
+
+	public void deleteReply(ReplyVO vo) {
+		dao.deleteReply(vo);
+		
+	}
 }

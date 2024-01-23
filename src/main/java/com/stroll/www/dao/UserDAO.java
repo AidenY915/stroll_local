@@ -14,5 +14,14 @@ public class UserDAO {
 	public UserVO checkPassword(UserVO vo) {
 		return mybatis.selectOne("user.checkPassword", vo);
 	}
+
+	public void registerUser(UserVO vo) {
+		mybatis.insert("user.registerUser", vo);
+	}
+
+	public UserVO selectUser(UserVO vo) {
+		return mybatis.selectOne("user.selectUser");
+		
+	}
 	
 }

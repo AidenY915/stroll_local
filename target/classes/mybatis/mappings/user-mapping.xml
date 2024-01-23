@@ -6,4 +6,10 @@
 	<select id = "checkPassword" resultType="user">
 		SELECT id FROM USER WHERE ID = #{id} AND PASSWORD = #{password}
 	</select>
+	<select id = "selectUser" parameterType="user">
+		SELECT * FORM USER WHERE ID = #{id} 
+	</select>
+	<insert id = "registerUser" parameterType="user">
+		INSERT INTO USER VALUES(#{id}, #{password}, #{nickname}, #{email})
+	</insert>
 </mapper>

@@ -42,22 +42,23 @@
 		</div>
 	</header>
 	<div class="container">
-		<ul class="categoryUl">
-			<li data-category="">전체</li>
-			<li data-category="pension">펜션</li>
-			<li data-category="cafe">카페</li>
-			<li data-category="grooming">미용</li>
-			<li data-category="hospital">동물병원</li>
-			<li data-category="playground">놀이터</li>
-			<li data-category="kindergarden">유치원</li>
-			<c:if test="${id!=null}">
-				<button id="addNewPlaceBtn" onclick=location.assign("newplace");>새
-					장소 등록</button>
-			</c:if>
-		</ul>
+		<form method="get" action="aroundme" name="research">
+			<ul class="categoryUl">
+				<li data-category="">전체</li>
+				<li data-category="pension">펜션</li>
+				<li data-category="cafe">카페</li>
+				<li data-category="grooming">미용</li>
+				<li data-category="hospital">동물병원</li>
+				<li data-category="playground">놀이터</li>
+				<li data-category="kindergarden">유치원</li>
+				<c:if test="${id!=null}">
+					<button id="addNewPlaceBtn" type="button" onclick='location.assign("newplace");'>새
+						장소 등록</button>
+				</c:if>
+			</ul>
 
-		<aside class="sideFilter">
-			<form method="get" action="aroundme" name="research">
+			<aside class="sideFilter">
+
 				<div class="distanceFilter">
 					거리
 					<div class="sliderContainer"></div>
@@ -78,32 +79,42 @@
 				<input type="hidden" name="y"
 					value="${param.y == null ? 0 : param.y}" />
 				<button class="submitBtn" type="submit">다시 찾기</button>
-			</form>
-		</aside>
-		<section class="resultContents">
-			<ul class="orderByUl">
-				<li data-order="distance">거리 순</li>
-				<li data-order="star">별점 순</li>
-				<li data-order="review">리뷰 순</li>
-			</ul>
-			<ul class="results">
-				<c:forEach var="place" items="${places}">
-					<li><a href='detail?no=${place.no}'> <img class="placeImg"
-							src="resources/upload/imgs/${place.no}_1.jpg" onerror=this.src="http://placehold.it/180x240">
-							<div>
-								<p>
-									<span class="placeName">${place.title}</span>
-									<c:if test="${param.x != null && param.x!=0}">
-										<span class="distance">${place.distance}m</span>
-									</c:if>
-								</p>
-								<p>${place.address}${place.detailAddress}</p>
-								<p class="star">★ ${place.star}</p>
-							</div>
-					</a></li>
-				</c:forEach>
-			</ul>
-		</section>
+
+			</aside>
+			<section class="resultContents">
+				<ul class="orderByUl">
+					<li data-order="distance">거리 순</li>
+					<li data-order="star">별점 순</li>
+					<li data-order="review">리뷰 순</li>
+				</ul>
+				<ul class="results">
+					<c:forEach var="place" items="${places}">
+						<li><a href='detail?no=${place.no}'> <img
+								class="placeImg" src="resources/upload/imgs/${place.no}_1.jpg"
+								onerror=this.src="http://placehold.it/180x240">
+								<div>
+									<p>
+										<span class="placeName">${place.title}</span>
+										<c:if test="${param.x != null && param.x!=0.0}">
+											<span class="distance">${place.distance}m</span>
+										</c:if>
+									</p>
+									<p>${place.address}${place.detailAddress}</p>
+									<p class="star">★ ${place.star}</p>
+								</div>
+						</a></li>
+					</c:forEach>
+				</ul>
+				<div class="pagingDiv">
+					<input type="hidden" value="${param.page == null ? 1 : param.page}"
+						name="page">
+					<c:forEach var="tmpPage" begin="${firstPage}" end="${lastPage}">
+						<button class = 'pageBtn <c:if test = "${tmpPage == param.page || (param.page==null &&tmpPage==1)}">currentPage</c:if>' onclick="document.research.page.value=${tmpPage};"
+							>${tmpPage}</button>
+					</c:forEach>
+				</div>
+			</section>
+		</form>
 	</div>
 </body>
 </html>

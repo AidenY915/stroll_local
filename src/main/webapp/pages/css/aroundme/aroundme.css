@@ -29,7 +29,7 @@
 	float: left;
 }
 
-.sideFilter>form>div {
+.sideFilter>div {
 	height: 200px;
 }
 
@@ -151,4 +151,19 @@ button#addNewPlaceBtn {
 	border: 0px;
 	border-radius: 5px;
 	float: right;
+}
+
+.pageBtn{
+	color : inherit;
+	border : 0px; 	
+}
+.pageBtn:hover {
+	background-color: #f5f5f5;
+	color : #fff 
+}
+.currentPage {
+	color : #f5f5f5;
+}
+.pagingDiv {
+	text-align: center;
 }

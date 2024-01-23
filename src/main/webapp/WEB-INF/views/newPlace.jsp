@@ -5,15 +5,15 @@
 <head>
 <meta charset="UTF-8">
 <title>새 장소</title>
+<link rel="icon" href="pages/images/favicon.png" />
 <link rel='stylesheet' href="pages/css/frameCss.css">
 <link rel='stylesheet' href="pages/css/newPlace/newPlace.css">
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"
+	integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+	crossorigin="anonymous"></script>
 <script
-      src="https://code.jquery.com/jquery-3.7.1.min.js"
-      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
-      crossorigin="anonymous"
-    ></script>
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script src = "pages/js/newPlace/newPlaceAddress.js"></script>
+	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="pages/js/newPlace/newPlaceAddress.js"></script>
 </head>
 <body>
 	<%@include file="gnb.jsp"%>
@@ -21,7 +21,8 @@
 		enctype="multipart/form-data">
 		<section class="about">
 			<div class="imgSlider">
-				<input type='file' name="imgs" multiple accept="image/jpg image/jpeg image/png"/> <img
+				<input type='file' name="imgs" multiple
+					accept="image/jpg image/jpeg image/png" /> <img
 					class="displayedImg" />
 				<section class="splide" aria-label="Splide Basic HTML Example">
 					<div class="splide__track">
@@ -48,9 +49,10 @@
 					<span>주소</span> <input type="text" id="sample4_postcode"
 						placeholder="우편번호"> <input type="button"
 						onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
-					<input type="text" id="sample4_roadAddress" name = "address" placeholder="도로명주소">
-					<span id="guide" style="color: #999; display: none"></span> <input
-						type="text" id="sample4_detailAddress" name = "detailAddress" placeholder="상세주소">
+					<input type="text" id="sample4_roadAddress" name="address"
+						placeholder="도로명주소"> <span id="guide"
+						style="color: #999; display: none"></span> <input type="text"
+						id="sample4_detailAddress" name="detailAddress" placeholder="상세주소">
 					<input type="text" id="sample4_extraAddress" placeholder="참고항목">
 				</p>
 				<p>
