@@ -62,3 +62,7 @@
 .commentWritingForm > select {
   display: block;
 }
+.wishBtn{
+	backgroundColor:#fff;
+	border : 0;
+}

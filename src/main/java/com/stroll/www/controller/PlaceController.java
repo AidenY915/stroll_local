@@ -1,6 +1,7 @@
 package com.stroll.www.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.stroll.www.vo.PlaceVO;
+import com.stroll.www.vo.WishVO;
 
 @Controller
 public class PlaceController {
@@ -19,6 +21,8 @@ public class PlaceController {
 	private PlaceService placeService;
 	@Autowired
 	private ReplyService replyService;
+	@Autowired
+	private UserService userService;
 
 	@RequestMapping("/aroundme")
 	public String showAroundme(PlaceVO vo, Model model, HttpServletRequest request) {
@@ -40,10 +44,16 @@ public class PlaceController {
 	}
 
 	@RequestMapping("/detail")
-	public String showDetail(PlaceVO vo, Model model) {
+	public String showDetail(PlaceVO vo, WishVO wishVO, Model model, HttpSession session) {
 		model.addAttribute("place", placeService.getPlace(vo));
 		model.addAttribute("imgs", placeService.getImgs(vo));
 		model.addAttribute("replies", replyService.selectReplies(vo));
+		String id = (String) session.getAttribute("id");
+		if (id != null) {
+			wishVO.setUserId(id);
+			wishVO.setPlaceNo(vo.getNo());
+			model.addAttribute("isWishedPlace", userService.isWishedPlace(wishVO));
+		}
 		return "detail";
 	}
 

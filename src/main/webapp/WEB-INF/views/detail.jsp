@@ -31,6 +31,7 @@ https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js
 "></script>
 <script src="pages/js/footer.js"></script>
 <script src="pages/js/detail/splide.js"></script>
+<script src="pages/js/detail/detail.js"></script>
 </head>
 <body>
 	<%@include file="gnb.jsp"%>
@@ -49,7 +50,15 @@ https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js
 				</section>
 			</div>
 			<article>
-				<h2>${place.title}</h2>
+				<h2>${place.title}<c:if test="${id != null}">
+					<button class="wishBtn">
+						<img
+							src=<c:choose>
+						<c:when test = "${isWishedPlace eq 'true'}">"pages/images/wished.png"</c:when>
+						<c:otherwise>"pages/images/beforeWish.png"</c:otherwise>
+						</c:choose>>
+					</button>
+				</c:if></h2>
 				<p>★ ${place.star}</p>
 				<p>
 					<span>${place.address} ${place.detailAddress}</span>
@@ -81,9 +90,9 @@ https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js
 							<c:forEach begin="1" end="${reply.star}">★</c:forEach>
 						</p>
 						<p class='content'>${reply.content}</p>
-						<p class='createdDate'>${reply.writtenDate}</p>
-						<c:if test="${reply.userId == sessionScope.id}">
-							<a href = "deleteReply?no=${reply.no}&placeNo=${param.no}">
+						<p class='createdDate'>${reply.writtenDate}</p> <c:if
+							test="${reply.userId == sessionScope.id}">
+							<a href="deleteReply?no=${reply.no}&placeNo=${param.no}">
 								<button>삭제</button>
 							</a>
 						</c:if>

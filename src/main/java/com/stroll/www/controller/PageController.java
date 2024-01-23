@@ -29,9 +29,4 @@ public class PageController {
 	public String showRegisterPage() {
 		return "register";
 	}
-	@RequestMapping("/mypage")
-	public String showMyPage(HttpSession session) {
-		if(session.getAttribute("id") == null) return "redirect:/";
-		return "myPage";
-	}
 }

@@ -37,3 +37,13 @@ CREATE TABLE reply(
 	CONSTRAINT fk_reply_user_id FOREIGN KEY (userId) REFERENCES user(id) ON DELETE CASCADE
 );
 CREATE INDEX ix_reply_placeNo ON reply(placeNo);
+
+CREATE TABLE wishList(
+	no INT PRIMARY KEY AUTO_INCREMENT,
+    userId CHAR(20) NOT NULL,
+    placeNo int NOT NULL,
+    CONSTRAINT fk_wishList_user_id FOREIGN KEY (userId) REFERENCES user(id) ON DELETE CASCADE,
+    CONSTRAINT fk_wishList_place_no FOREIGN KEY (placeNo) REFERENCES place(no) ON DELETE CASCADE
+);
+ALTER TABLE wishList ADD UNIQUE (userId, placeNo);
+CREATE INDEX ix_wishList_userId ON wishList(userId);

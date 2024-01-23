@@ -3,13 +3,49 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="user">
-	<select id = "checkPassword" resultType="user">
-		SELECT id FROM USER WHERE ID = #{id} AND PASSWORD = #{password}
+	<select id="checkPassword" resultType="user">
+		SELECT id FROM USER WHERE
+		ID = #{id} AND PASSWORD = #{password}
 	</select>
-	<select id = "selectUser" parameterType="user">
-		SELECT * FORM USER WHERE ID = #{id} 
+	<select id="selectUser" parameterType="user">
+		SELECT * FORM USER WHERE
+		ID = #{id}
 	</select>
-	<insert id = "registerUser" parameterType="user">
-		INSERT INTO USER VALUES(#{id}, #{password}, #{nickname}, #{email})
+	<insert id="registerUser" parameterType="user">
+		INSERT INTO USER
+		VALUES(#{id}, #{password}, #{nickname}, #{email})
 	</insert>
+
+	<insert id="insertToWishList" parameterType="wish">
+		INSERT INTO WISH
+		VALUES(NULL ,#{userId}, #{placeNo})
+	</insert>
+	<delete id="deleteFromWishList" parameterType="wish">
+		DELETE FROM WISH
+		WHERE USERID = #{userId} AND PLACENO = #{placeNo}
+	</delete>
+
+	<select id="selectWish" resultType="wish">
+		SELECT * FROM WISH WHERE
+		USERID = #{userId} AND PLACENO = #{placeNo}
+	</select>
+
+	<select id="selectWishedPlaces" parameterType="wish"
+		resultType="place">
+		SELECT * FROM WISH INNER JOIN PLACE ON WISH.PLACENO =
+		PLACE.NO WHERE WISH.USERID = #{userId}
+	</select>
+
+	<select id="selectUserPlaces" parameterType="user"
+		resultType="place">
+		SELECT * FROM PLACE WHERE USERID = #{id}
+	</select>
+
+	<select id="selectUserReviews" parameterType="user"
+		resultType="reply">
+		SELECT * FROM reply WHERE USERID = #{id}
+	</select>
+	<delete id="deleteUser" parameterType="user">
+		DELETE FROM USER WHERE ID = #{id} AND PASSWORD = #{password} 
+	</delete>
 </mapper>
