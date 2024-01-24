@@ -8,6 +8,7 @@
 <title>회원가입</title>
 <link rel="icon" href="pages/images/favicon.png" />
 <link rel="stylesheet" href="pages/css/frameCss.css" />
+<link rel="stylesheet" href="pages/css/register/register.css" />
 <!--  JQuery  -->
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"
 	integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
@@ -24,12 +25,14 @@
 		<form name="registerForm" method="post" action="registerOK" >
 			<table>
 				<tr>
-					<td>ID</td>
+					<td>아이디</td>
 					<td><input type="text" name="id" required></td>
+					<td><span id="idDuplicateMessage"></span></td>
 				</tr>
 				<tr>
 					<td>비밀번호</td>
 					<td><input type="password" name="password" required></td>
+					<td id = "passwordMessageSpan"></td>
 				</tr>
 				<tr>
 					<td>비밀번호 확인</td>
@@ -38,6 +41,7 @@
 				<tr>
 					<td>닉네임</td>
 					<td><input type="text" name="nickname" required></td>
+					<td><span id="nicknameDuplicateMessage"></td>
 				</tr>
 				<tr>
 					<td>이메일</td>

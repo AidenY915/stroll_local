@@ -29,4 +29,8 @@ public class PlaceDAO {
 	public List<PlaceVO> getPlaceListByAddress(PlaceVO vo) {
 		return mybatis.selectList("place.selectPlacesByAddress", vo);
 	}
+
+	public int deletePlace(PlaceVO vo) {
+		return mybatis.delete("place.deletePlace", vo);
+	}
 }

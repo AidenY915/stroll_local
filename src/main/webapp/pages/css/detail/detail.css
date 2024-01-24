@@ -5,6 +5,7 @@
   padding-bottom: 30px;
   min-height: 390px;
   margin-bottom: 50px;
+  position:relative;
 }
 
 .imgSlider > img {
@@ -63,6 +64,28 @@
   display: block;
 }
 .wishBtn{
-	backgroundColor:#fff;
+	background-color:#fff;
 	border : 0;
+	cursor: pointer;
+}
+
+.replyBtn {
+	color : #fff;
+	background-color:#ff5f55;
+	border : 0;
+	border-radius:2px;
+	padding : 3px 5px;
+	cursor: pointer;
+}
+
+.deletePlaceBtn{
+	color : #fff;
+	background-color:#ff5f55;
+	border : 0;
+	border-radius:2px;
+	padding : 3px 5px;
+	cursor: pointer;
+	position:absolute;
+	right : 10px;
+	bottom : 10px;	
 }

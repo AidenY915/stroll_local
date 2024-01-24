@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,9 +28,9 @@
 	<div class="container">
 		<aside class="sideLnb">
 			<ul>
-				<li><a href="mypage?list=wishList">내가 찜한 장소</a></li>
-				<li><a href="mypage?list=myPlaces">내 리뷰</a></li>
-				<li><a href="mypage?list=reviews">내 장소</a></li>
+				<li id="wishListLi"><a href="mypage?list=wishList">내가 찜한 장소</a></li>
+				<li id="myPlacesLi"><a href="mypage?list=myPlaces">내 장소</a></li>
+				<li id="reviewsLi"><a href="mypage?list=reviews">내 리뷰</a></li>
 				<li id="withdrawLi">회원탈퇴</li>
 			</ul>
 		</aside>
@@ -41,7 +42,7 @@
 					<c:when test="${param.list==null || param.list=='reviews'}">내 리뷰</c:when>
 				</c:choose>
 			</h3>
-			<hr/>
+			<hr />
 			<c:if test="${places != null}">
 				<ul class="results">
 					<c:forEach var="place" items="${places}">
@@ -62,8 +63,28 @@
 					</c:forEach>
 				</ul>
 			</c:if>
-			<c:if test="${reviews != null}"></c:if>
-		</section>
-	</div>
+			<c:if test="${reviews != null}">
+				<table class="reviews">
+					<thead>
+						<tr>
+							<th>장소 이름</th>
+							<th>내용</th>
+							<th>별점</th>
+							<th>작성일</th>
+						</tr>
+					</thead>
+					<c:forEach var="review" items="${reviews}">
+						<tr>
+							<td><a href="detail?no=${review.placeNo}">${review.placeTitle}</a></td>
+							<td>${review.content}</td>
+							<td>★${review.star}</td>
+							<td><fmt:formatDate value="${review.writtenDate}"
+									pattern="yyyy-MM-dd HH:mm" /></td>
+						</tr>
+					</c:forEach>
+					</ul>
+					</c:if>
+					</section>
+					</div>
 </body>
 </html>

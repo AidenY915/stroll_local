@@ -48,13 +48,14 @@ public class UserController {
 		return "redirect:/";
 	}
 
-	@RequestMapping(value = "idDuplicateCheck")
+	@RequestMapping(value = "/duplicateCheck")
 	public void idDuplicateCheck(UserVO vo, HttpServletResponse response) {
 		try (PrintWriter out = response.getWriter()) {
-			service.idDuplicateCheck(vo, out);
+			service.duplicateCheck(vo, out);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		response.setStatus(200);
 		return;
 	}
 

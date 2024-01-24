@@ -18,6 +18,7 @@ public class PlaceVO implements Serializable {
 	private String detailAddress;
 	private double x;
 	private double y;
+	private String userId;
 	private int distance;
 	private float star;
 
@@ -101,6 +102,14 @@ public class PlaceVO implements Serializable {
 		this.y = y;
 	}
 	
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
 	public float getStar() {
 		return star;
 	}

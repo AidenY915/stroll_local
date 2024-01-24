@@ -24,7 +24,7 @@ public class UserDAO {
 	}
 
 	public UserVO selectUser(UserVO vo) {
-		return mybatis.selectOne("user.selectUser");
+		return mybatis.selectOne("user.selectUser", vo);
 
 	}
 	public WishVO selectWish(WishVO vo) {
@@ -51,5 +51,9 @@ public class UserDAO {
 
 	public int deleteUser(UserVO vo) {
 		return mybatis.delete("user.deleteUser", vo);
+	}
+
+	public UserVO selectUserByNickname(UserVO vo) {
+		return mybatis.selectOne("user.selectUserByNickname", vo);
 	}
 }

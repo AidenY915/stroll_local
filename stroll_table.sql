@@ -25,7 +25,6 @@ CREATE TABLE user(
 );
 
 
-
 DROP TABLE IF EXISTS reply;
 CREATE TABLE reply(
 	no INT PRIMARY KEY AUTO_INCREMENT,
@@ -38,12 +37,12 @@ CREATE TABLE reply(
 );
 CREATE INDEX ix_reply_placeNo ON reply(placeNo);
 
-CREATE TABLE wishList(
+CREATE TABLE wish(
 	no INT PRIMARY KEY AUTO_INCREMENT,
     userId CHAR(20) NOT NULL,
     placeNo int NOT NULL,
     CONSTRAINT fk_wishList_user_id FOREIGN KEY (userId) REFERENCES user(id) ON DELETE CASCADE,
     CONSTRAINT fk_wishList_place_no FOREIGN KEY (placeNo) REFERENCES place(no) ON DELETE CASCADE
 );
-ALTER TABLE wishList ADD UNIQUE (userId, placeNo);
-CREATE INDEX ix_wishList_userId ON wishList(userId);
+ALTER TABLE wish ADD UNIQUE (userId, placeNo);
+CREATE INDEX ix_wish_userId ON wish(userId);

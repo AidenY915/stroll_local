@@ -29,12 +29,16 @@ public class PlaceController {
 		String keywords = request.getParameter("keywords");
 		String order = request.getParameter("order");
 		String pageStr = request.getParameter("page");
+		String maxDistanceStr = request.getParameter("maxDistance");
+		String minStarStr = request.getParameter("minStar");
+		int maxDistance = maxDistanceStr == null ? -1 : Integer.parseInt(maxDistanceStr);
+		int minStar = minStarStr == null ? -1 : Integer.parseInt(minStarStr);
 		if (keywords == null)
 			keywords = "";
 		if (order == null)
 			order = "distance";
 		int page = pageStr == null ? 1 : Integer.parseInt(pageStr);
-		model.addAttribute("places", placeService.getPlaceList(vo, keywords, order, page, request));
+		model.addAttribute("places", placeService.getPlaceList(vo, keywords, order, page, request , maxDistance, minStar));
 		int numOfPages = (Integer) request.getAttribute("numOfPages");
 		int firstPage = page - 4 >= 1 ? page - 4 : 1;
 		int lastPage = firstPage + 8 <= numOfPages ? firstPage + 8 : numOfPages;
@@ -63,5 +67,12 @@ public class PlaceController {
 		System.out.println("insertPlace입장");
 		redirect.addAttribute("no", placeService.insertPlace(vo, imgs));
 		return "redirect:detail";
+	}
+	@RequestMapping(value = "/deletePlace")
+	public String deletePlace(PlaceVO vo, HttpSession session) {
+		String id = (String) session.getAttribute("id");
+		if(id==null || !placeService.deletePlace(vo, id))
+			return "redirect:detail?no="+vo.getNo();
+		return "redirect:aroundme"; 
 	}
 }

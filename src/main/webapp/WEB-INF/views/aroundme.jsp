@@ -10,7 +10,6 @@
 <title>내 주변</title>
 <link rel="stylesheet" href="pages/css/aroundme/aroundme.css" />
 <link rel="stylesheet" href="pages/css/frameCss.css" />
-<link rel="stylesheet" href="pages/css/aroundme/slider.css" />
 <!--  JQuery  -->
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"
 	integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
@@ -26,7 +25,6 @@
 
 <script src="pages/js/footer.js"></script>
 <script src="pages/js/aroundme/addResultContents.js"></script>
-<script src="pages/js/aroundme/slider.js"></script>
 <script src="pages/js/aroundme/aroundme.js"></script>
 <script src="pages/js/aroundme/kakaoMap.js"></script>
 </head>
@@ -52,8 +50,8 @@
 				<li data-category="playground">놀이터</li>
 				<li data-category="kindergarden">유치원</li>
 				<c:if test="${id!=null}">
-					<button id="addNewPlaceBtn" type="button" onclick='location.assign("newplace");'>새
-						장소 등록</button>
+					<button id="addNewPlaceBtn" type="button"
+						onclick='location.assign("newplace");'>새 장소 등록</button>
 				</c:if>
 			</ul>
 
@@ -61,15 +59,13 @@
 
 				<div class="distanceFilter">
 					거리
-					<div class="sliderContainer"></div>
+					<input class = "filterSlider" type="range" min="1" max="50" value="${param.maxDistance == null ? 50 : param.maxDistance}" name = "maxDistance">
+					<p id = "maxDistance">내 주변 5000m 이하</p>
 				</div>
 				<div class="starFilter">
-					별점
-					<div class="sliderContainer"></div>
-				</div>
-				<div class="reviewFilter">
-					리뷰
-					<div class="sliderContainer"></div>
+					별점 
+					<input class = "filterSlider" type="range" min="0" max="5" value="${param.minStar == null ? 0 : param.minStar}" name = "minStar">
+					<p id = "minStar">★0개 이상</p>
 				</div>
 				<input type="hidden" name="keywords" value="${param.keywords}" /> <input
 					type="hidden" name="address" value="${param.address}" /> <input
@@ -85,7 +81,6 @@
 				<ul class="orderByUl">
 					<li data-order="distance">거리 순</li>
 					<li data-order="star">별점 순</li>
-					<li data-order="review">리뷰 순</li>
 				</ul>
 				<ul class="results">
 					<c:forEach var="place" items="${places}">
@@ -99,7 +94,7 @@
 											<span class="distance">${place.distance}m</span>
 										</c:if>
 									</p>
-									<p>${place.address}${place.detailAddress}</p>
+									<p>${place.address} ${place.detailAddress}</p>
 									<p class="star">★ ${place.star}</p>
 								</div>
 						</a></li>
@@ -109,8 +104,9 @@
 					<input type="hidden" value="${param.page == null ? 1 : param.page}"
 						name="page">
 					<c:forEach var="tmpPage" begin="${firstPage}" end="${lastPage}">
-						<button class = 'pageBtn <c:if test = "${tmpPage == param.page || (param.page==null &&tmpPage==1)}">currentPage</c:if>' onclick="document.research.page.value=${tmpPage};"
-							>${tmpPage}</button>
+						<button
+							class='pageBtn <c:if test = "${tmpPage == param.page || (param.page==null &&tmpPage==1)}">currentPage</c:if>'
+							onclick="document.research.page.value=${tmpPage};">${tmpPage}</button>
 					</c:forEach>
 				</div>
 			</section>

@@ -36,7 +36,8 @@ public class PlaceService {
 		return vo;
 	}
 
-	public List<PlaceVO> getPlaceList(PlaceVO vo, String keywords, String order, int page, HttpServletRequest request) {
+	public List<PlaceVO> getPlaceList(PlaceVO vo, String keywords, String order, int page, HttpServletRequest request,
+			int maxDistance, int minStar) {
 		List<PlaceVO> listFromDb = null;
 		keywords = keywords.replaceAll(" ", "|");
 		if (keywords.equals(""))
@@ -58,9 +59,12 @@ public class PlaceService {
 					+ Math.pow(place.getY() * 110940 - vo.getY() * 110940, 2))), 0.5));
 			place.setStar(Math.round(place.getStar() * 10) / 10.0f);
 		}
-		request.setAttribute("numOfPages", (int)Math.ceil(listFromDb.size()/(double)PAGE_SIZE));
 		sortPlaces(listFromDb, order);
+		if(vo.getX()!=0)
+			filterPlaces(listFromDb, maxDistance, minStar);
+		
 		List<PlaceVO> rsltList = new LinkedList<>();
+		request.setAttribute("numOfPages", (int) Math.ceil(listFromDb.size() / (double) PAGE_SIZE));
 		for (int i = (page - 1) * PAGE_SIZE; i < (page) * PAGE_SIZE && i < listFromDb.size(); i++) {
 			rsltList.add(listFromDb.get(i));
 		}
@@ -166,8 +170,34 @@ public class PlaceService {
 		case "star":
 			Collections.sort(placeList, (p1, p2) -> ((int) (p2.getStar() - p1.getStar() * 10)));
 			break;
-		case "review":
-			break;
 		}
+	}
+
+	private void filterPlaces(List<PlaceVO> placeList, int maxDistance, int minStar) {
+		if (maxDistance >= 1 && maxDistance <= 50) {
+			maxDistance*=100;
+			for (int i = 0; i < placeList.size(); i++) {
+				if (placeList.get(i).getDistance() > maxDistance) {
+					placeList.remove(i);
+					i--;
+				}
+			}
+		}
+		if (minStar >= 1 && minStar <= 5) {
+			for (int i = 0; i < placeList.size(); i++) {
+				if (placeList.get(i).getStar() < minStar) {
+					placeList.remove(i);
+					i--;
+				}
+			}
+		}
+	}
+
+	public boolean deletePlace(PlaceVO vo, String id) {
+		vo = dao.getPlace(vo);
+		if (vo.getUserId().equals(id)) {
+			return dao.deletePlace(vo) == 1;
+		}
+		return false;
 	}
 }

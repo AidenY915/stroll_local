@@ -18,10 +18,11 @@ public class UserService {
 
 	private String checkPassword(UserVO vo) {
 		UserVO rsltVO = dao.checkPassword(vo);
-		if(rsltVO == null) return null;
+		if (rsltVO == null)
+			return null;
 		return rsltVO.getId();
 	}
-	
+
 	public String login(UserVO vo) {
 		return checkPassword(vo);
 	}
@@ -30,25 +31,30 @@ public class UserService {
 		dao.registerUser(vo);
 	}
 
-	public void idDuplicateCheck(UserVO vo, PrintWriter out) {
-		vo = dao.selectUser(vo);
-		if(vo == null) {
+	public void duplicateCheck(UserVO vo, PrintWriter out) {
+		if (vo.getId() != null)
+			vo = dao.selectUser(vo);
+		else if (vo.getNickname() != null)
+			vo = dao.selectUserByNickname(vo);
+		if (vo == null) {
 			out.print("true");
-		}else {
+		} else {
 			out.print("false");
 		}
-		return;	
+		return;
 	}
 
 	public void addToWishList(WishVO vo) {
-		if(dao.selectWish(vo)==null)
+		if (dao.selectWish(vo) == null)
 			dao.insertToWishList(vo);
 	}
+
 	public void deleteFromWishList(WishVO vo) {
 		dao.deleteFromWishList(vo);
 	}
+
 	public Boolean isWishedPlace(WishVO vo) {
-		return dao.selectWish(vo)!=null;
+		return dao.selectWish(vo) != null;
 	}
 
 	public List<PlaceVO> getWishedPlaces(WishVO vo) {
@@ -64,7 +70,7 @@ public class UserService {
 	}
 
 	public boolean withdraw(UserVO vo) {
-		if(dao.deleteUser(vo) != 1) {
+		if (dao.deleteUser(vo) != 1) {
 			return false;
 		}
 		return true;

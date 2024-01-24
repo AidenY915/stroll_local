@@ -110,3 +110,36 @@ ul.results>li>a>div {
 	color: rgba(0, 0, 0, 0.8);
 	font-weight: 700;
 }
+
+.selectedLi {
+	color: #ff5f55;
+}
+.withdrawBtn{
+	color : #fff;
+	background-color:rgba(0, 0, 0, 0.6);
+	border : 0;
+	border-radius:2px;
+	padding : 3px 5px;
+	cursor: pointer;
+}
+.reviews td{
+	height: 60px;
+	border-bottom : 0.5px solid #aaa;
+}
+.reviews th{
+	border-bottom : 0.5px solid #aaa;
+	padding : 0 0 8px 0;
+}
+
+.reviews td:nth-child(1) {
+	width: 150px;
+	text-align:center;	
+}
+.reviews td:nth-child(2) {
+	width: 350px;
+}
+
+.reviews a {
+	text-decoration : none;	
+	color : inherit;
+}

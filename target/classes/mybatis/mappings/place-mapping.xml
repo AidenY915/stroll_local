@@ -5,23 +5,30 @@
 <mapper namespace="place">
 	<select id="selectPlaces" parameterType="place"
 		resultType="place">
-		SELECT * FROM PLACE LEFT OUTER JOIN (SELECT AVG(STAR) "STAR", PLACENO FROM REPLY GROUP BY PLACENO) AS REPLY ON PLACE.NO = REPLY.PLACENO
+		SELECT * FROM PLACE LEFT OUTER JOIN (SELECT AVG(STAR)
+		"STAR", PLACENO FROM REPLY GROUP BY PLACENO) AS REPLY ON PLACE.NO =
+		REPLY.PLACENO
 		WHERE TITLE REGEXP #{title} or ADDRESS
-		REGEXP #{address} or DETAILADDRESS
+		REGEXP #{address}
+		or DETAILADDRESS
 		REGEXP #{detailAddress}
 	</select>
 	<select id="selectPlacesByAddress" parameterType="place"
 		resultType="place">
-		SELECT * FROM PLACE LEFT OUTER JOIN (SELECT AVG(STAR) "STAR", PLACENO FROM REPLY GROUP BY PLACENO) AS REPLY ON PLACE.NO = REPLY.PLACENO
+		SELECT * FROM PLACE LEFT OUTER JOIN (SELECT AVG(STAR) "STAR", PLACENO
+		FROM REPLY GROUP BY PLACENO) AS REPLY ON PLACE.NO = REPLY.PLACENO
 		WHERE ADDRESS REGEXP #{address} and (TITLE REGEXP
-		#{title} or DETAILADDRESS
+		#{title} or
+		DETAILADDRESS
 		REGEXP #{detailAddress})
 		<if test='!category.equals("")'> and CATEGORY = #{category}</if>
 	</select>
 	<select id="selectPlace" parameterType="place"
 		resultType="place">
-		<!--  SELECT * FROM PLACE WHERE no = #{no}  -->
-		SELECT * FROM PLACE LEFT OUTER JOIN (SELECT AVG(STAR) "STAR", PLACENO FROM REPLY GROUP BY PLACENO) AS REPLY ON PLACE.NO = REPLY.PLACENO WHERE NO = #{no}
+		<!-- SELECT * FROM PLACE WHERE no = #{no} -->
+		SELECT * FROM PLACE LEFT OUTER JOIN (SELECT AVG(STAR) "STAR", PLACENO
+		FROM REPLY GROUP BY PLACENO) AS REPLY ON PLACE.NO = REPLY.PLACENO
+		WHERE NO = #{no}
 	</select>
 	<insert id="insertPlace" parameterType="place"
 		useGeneratedKeys="true" keyProperty="no">
@@ -31,4 +38,8 @@
 		#{content},
 		#{category}, #{address}, #{detailAddress}, #{x}, #{y})
 	</insert>
+	<delete id="deletePlace" parameterType="place">
+		DELETE FROM PLACE WHERE
+		NO = #{no}
+	</delete>
 </mapper>

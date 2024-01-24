@@ -19,10 +19,10 @@ $(() => {
     $(`.categoryUl > li[data-category = '${category}']`).trigger("click");
   if (order != null)
     $(`.orderByUl > li[data-order = '${order}']`).trigger("click");
-
-  appendSlider(".sliderContainer:eq(0)", 0, 30, 1, "km");
-  appendSlider(".sliderContainer:eq(1)", 0, 5, 0, "점");
-  appendSlider(".sliderContainer:eq(2)", 0, 30, -2, "개");
+  
+  $(".distanceFilter > .filterSlider").on("change", changeDistanceFilter)  
+  $(".starFilter > .filterSlider").on("change", changeStarFilter)
+  $(".submitBtn").on("click", changePage1)
 });
 
 
@@ -54,3 +54,14 @@ const closeMap = function (e) {
   }
 };
 
+
+const changeDistanceFilter = function() {
+	$("#maxDistance").text("내 주변 " + this.value + "00m 이하");
+}
+const changeStarFilter = function() {
+	$("#minStar").text("★" + this.value + "개 이상");
+}
+
+const changePage1 = function() {
+	research.page.value=1;
+}

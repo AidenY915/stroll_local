@@ -7,9 +7,15 @@
 		SELECT id FROM USER WHERE
 		ID = #{id} AND PASSWORD = #{password}
 	</select>
-	<select id="selectUser" parameterType="user">
-		SELECT * FORM USER WHERE
+	<select id="selectUser" parameterType="user" resultType="user">
+		SELECT *
+		FROM USER WHERE
 		ID = #{id}
+	</select>
+	<select id = "selectUserByNickname" parameterType="user" resultType="user">
+		SELECT *
+		FROM USER WHERE
+		NICKNAME = #{nickname}
 	</select>
 	<insert id="registerUser" parameterType="user">
 		INSERT INTO USER
@@ -32,7 +38,7 @@
 
 	<select id="selectWishedPlaces" parameterType="wish"
 		resultType="place">
-		SELECT * FROM WISH INNER JOIN PLACE ON WISH.PLACENO =
+		SELECT PLACE.NO "NO", TITLE, CONTENT, CATEGORY, WRITTENDATE, ADDRESS, DETAILADDRESS, X ,Y, PLACE.USERID "USERID" FROM WISH INNER JOIN PLACE ON WISH.PLACENO =
 		PLACE.NO WHERE WISH.USERID = #{userId}
 	</select>
 
@@ -43,9 +49,11 @@
 
 	<select id="selectUserReviews" parameterType="user"
 		resultType="reply">
-		SELECT * FROM reply WHERE USERID = #{id}
+		SELECT REPLY.NO "NO", REPLY.USERID "USERID", PLACENO, REPLY.CONTENT "CONTENT", STAR, REPLY.WRITTENDATE "WRITTENDATE", PLACE.TITLE "PLACETITLE" FROM REPLY INNER JOIN PLACE ON REPLY.PLACENO = PLACE.NO  WHERE REPLY.USERID = #{id}
 	</select>
+	
 	<delete id="deleteUser" parameterType="user">
-		DELETE FROM USER WHERE ID = #{id} AND PASSWORD = #{password} 
+		DELETE FROM USER WHERE ID
+		= #{id} AND PASSWORD = #{password}
 	</delete>
 </mapper>

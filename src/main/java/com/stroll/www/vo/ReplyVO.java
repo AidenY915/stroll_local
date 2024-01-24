@@ -12,6 +12,7 @@ public class ReplyVO implements Serializable{
 	private String content;
 	private int star;
 	private Timestamp writtenDate;
+	private String placeTitle;
 	public ReplyVO() {}
 	
 	public int getNo() {
@@ -56,6 +57,14 @@ public class ReplyVO implements Serializable{
 
 	public void setWrittenDate(Timestamp writtenDate) {
 		this.writtenDate = writtenDate;
+	}
+	
+	public String getPlaceTitle() {
+		return placeTitle;
+	}
+
+	public void setPlaceTitle(String placeTitle) {
+		this.placeTitle = placeTitle;
 	}
 
 	@Override
