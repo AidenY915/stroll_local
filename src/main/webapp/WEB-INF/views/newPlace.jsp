@@ -50,10 +50,10 @@ https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js
 			</div>
 			<article>
 				<h2>
-					장소 이름 : <input name="title" type="text">
+					장소 이름 : <input name="title" type="text" required>
 				</h2>
 				<div>
-					카테고리 : <select name="category">
+					카테고리 : <select name="category" required>
 						<option value="pension">펜션</option>
 						<option value="cafe">카페</option>
 						<option value="grooming">미용</option>
@@ -68,7 +68,7 @@ https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js
 						placeholder="우편번호"> <input type="button"
 						onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
 					<input type="text" id="sample4_roadAddress" name="address"
-						placeholder="도로명주소"> <span id="guide"
+						placeholder="도로명주소" required> <span id="guide"
 						style="color: #999; display: none"></span> <input type="text"
 						id="sample4_detailAddress" name="detailAddress" placeholder="상세주소">
 				</p>

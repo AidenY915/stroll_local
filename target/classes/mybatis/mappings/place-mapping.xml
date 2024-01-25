@@ -34,9 +34,9 @@
 		useGeneratedKeys="true" keyProperty="no">
 		INSERT INTO PLACE(TITLE,
 		CONTENT,
-		CATEGORY, ADDRESS, DETAILADDRESS, X, Y) VALUE(#{title},
+		CATEGORY, ADDRESS, DETAILADDRESS, X, Y, USERID) VALUE(#{title},
 		#{content},
-		#{category}, #{address}, #{detailAddress}, #{x}, #{y})
+		#{category}, #{address}, #{detailAddress}, #{x}, #{y}, #{userId})
 	</insert>
 	<delete id="deletePlace" parameterType="place">
 		DELETE FROM PLACE WHERE

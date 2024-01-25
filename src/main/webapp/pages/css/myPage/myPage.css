@@ -131,12 +131,18 @@ ul.results>li>a>div {
 	padding : 0 0 8px 0;
 }
 
-.reviews td:nth-child(1) {
-	width: 150px;
+.reviews td:nth-child(1) , .reviews th:nth-child(1) {
+	width: 175px;
 	text-align:center;	
 }
-.reviews td:nth-child(2) {
-	width: 350px;
+.reviews td:nth-child(2) , .reviews th:nth-child(2) {
+	width: 375px;
+}
+.reviews td:nth-child(3) , .reviews th:nth-child(3) {
+	width: 50px;
+}
+.reviews td:nth-child(4) , .reviews th:nth-child(4) {
+	width: 150px;
 }
 
 .reviews a {

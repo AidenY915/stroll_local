@@ -60,9 +60,9 @@ public class PlaceService {
 			place.setStar(Math.round(place.getStar() * 10) / 10.0f);
 		}
 		sortPlaces(listFromDb, order);
-		if(vo.getX()!=0)
+		if (vo.getX() != 0)
 			filterPlaces(listFromDb, maxDistance, minStar);
-		
+
 		List<PlaceVO> rsltList = new LinkedList<>();
 		request.setAttribute("numOfPages", (int) Math.ceil(listFromDb.size() / (double) PAGE_SIZE));
 		for (int i = (page - 1) * PAGE_SIZE; i < (page) * PAGE_SIZE && i < listFromDb.size(); i++) {
@@ -175,7 +175,7 @@ public class PlaceService {
 
 	private void filterPlaces(List<PlaceVO> placeList, int maxDistance, int minStar) {
 		if (maxDistance >= 1 && maxDistance <= 50) {
-			maxDistance*=100;
+			maxDistance *= 100;
 			for (int i = 0; i < placeList.size(); i++) {
 				if (placeList.get(i).getDistance() > maxDistance) {
 					placeList.remove(i);
@@ -196,8 +196,23 @@ public class PlaceService {
 	public boolean deletePlace(PlaceVO vo, String id) {
 		vo = dao.getPlace(vo);
 		if (vo.getUserId().equals(id)) {
+			deleteImgs(vo);
 			return dao.deletePlace(vo) == 1;
 		}
 		return false;
+	}
+
+	private void deleteImgs(PlaceVO vo) {
+		File dir = new File(
+				"C:\\Users\\Aiden\\Documents\\Codes\\SPRING\\stroll\\src\\main\\webapp\\resources\\upload\\imgs\\");
+		File[] files = dir.listFiles();
+		for(File file : files)
+		if (file.getName().contains(vo.getNo()+"_")) {
+			if (file.delete()) {
+				System.out.println("파일삭제 성공");
+			} else {
+				System.out.println("파일삭제 실패");
+			}
+		}
 	}
 }

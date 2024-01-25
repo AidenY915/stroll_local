@@ -60,12 +60,12 @@
 				<div class="distanceFilter">
 					거리
 					<input class = "filterSlider" type="range" min="1" max="50" value="${param.maxDistance == null ? 50 : param.maxDistance}" name = "maxDistance">
-					<p id = "maxDistance">내 주변 5000m 이하</p>
+					<p id = "maxDistance">내 주변 ${param.maxDistance == null ? 50 : param.maxDistance}00m 이하</p>
 				</div>
 				<div class="starFilter">
 					별점 
 					<input class = "filterSlider" type="range" min="0" max="5" value="${param.minStar == null ? 0 : param.minStar}" name = "minStar">
-					<p id = "minStar">★0개 이상</p>
+					<p id = "minStar">★${param.minStar == null ? 0 : param.minStar}개 이상</p>
 				</div>
 				<input type="hidden" name="keywords" value="${param.keywords}" /> <input
 					type="hidden" name="address" value="${param.address}" /> <input

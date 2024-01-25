@@ -62,9 +62,10 @@ public class PlaceController {
 	}
 
 	@RequestMapping(value = "/insertPlace", method = RequestMethod.POST)
-	public String insertPlace(@RequestParam("imgs") MultipartFile[] imgs, PlaceVO vo, RedirectAttributes redirect) {
-		System.out.println(vo);
-		System.out.println("insertPlace입장");
+	public String insertPlace(@RequestParam("imgs") MultipartFile[] imgs, PlaceVO vo, HttpSession session, RedirectAttributes redirect) {
+		String id = (String)session.getAttribute("id");
+		if(id == null) return "redirect:/";
+		vo.setUserId(id);
 		redirect.addAttribute("no", placeService.insertPlace(vo, imgs));
 		return "redirect:detail";
 	}
