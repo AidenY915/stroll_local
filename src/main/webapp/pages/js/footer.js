@@ -7,7 +7,7 @@ footer.style.marginTop = "120px";
 
 footer.innerHTML = `
   <div class = "container">
-    <img src = "../footer/footer_templete.png">
+    <img src = "pages/images/footer_templete.png">
   </div>
 `;
 

@@ -2,7 +2,6 @@ document.addEventListener("DOMContentLoaded", ()=>{
 	document.querySelector("#withdrawLi").addEventListener("click", showWithdraw);
 	let listQuery = (String(window.location.search)).replace("?list=", "") ;
 	listQuery = listQuery=="" ? "wishList" : listQuery
-	console.log(listQuery);
 	selectedLi = document.getElementById(listQuery+"Li");
 	selectedLi.classList.add("selectedLi");
 })

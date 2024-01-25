@@ -7,7 +7,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Detail</title>
-<link rel="icon" href="../images/favicon.png" />
+<link rel="icon" href="pages/images/favicon.png" />
 <!-- splider css -->
 <link
 	href="

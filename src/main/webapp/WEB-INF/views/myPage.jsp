@@ -7,16 +7,20 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>더보기</title>
+<title>마이페이지</title>
 <link rel="icon" href="pages/images/favicon.png" />
 <link rel="stylesheet" href="pages/css/frameCss.css" />
 <link rel="stylesheet" href="pages/css/myPage/myPage.css">
+<!--  JQuery  -->
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"
 	integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
 	crossorigin="anonymous"></script>
-<script src="pages/js/myPage/myPage.js">
-	<script src="pages/js/footer.js">
-</script>
+<!--  JQuery UI  -->
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"
+	integrity="sha256-lSjKY0/srUM9BE3dPm+c4fBo1dky2v27Gdjm2uoZaL0="
+	crossorigin="anonymous"></script>
+<script src="pages/js/myPage/myPage.js"></script>
+<script src="pages/js/footer.js"></script>
 </head>
 <body>
 	<%@include file="gnb.jsp"%>
@@ -82,9 +86,9 @@
 									pattern="yyyy-MM-dd HH:mm" /></td>
 						</tr>
 					</c:forEach>
-					</ul>
-					</c:if>
-					</section>
-					</div>
+				</table>
+			</c:if>
+		</section>
+	</div>
 </body>
 </html>

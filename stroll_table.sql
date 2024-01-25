@@ -15,6 +15,7 @@ CREATE TABLE place(
     CONSTRAINT fk_place_user_id FOREIGN KEY (userId) REFERENCES user(id) ON DELETE CASCADE
 );
 CREATE INDEX ix_place_userId ON place(userId);
+CREATE INDEX ix_place_address ON place(address);
 
 DROP TABLE IF EXISTS user;
 CREATE TABLE user(
