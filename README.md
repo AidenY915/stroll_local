@@ -22,27 +22,27 @@
   <h3>페이지별 이미지</h3>
   <div>
     <h4>메인</h4>
-    <img src = "https://github.com/AidenY915/stroll_spring/blob/images_for_readme/images_for_readme/main.png" width = "800px">
+    <img src = "https://github.com/AidenY915/stroll_spring/blob/main/images_for_readme/main.png" width = "800px">
   </div>
   <div>
     <h4>내 주변</h4>
-    <img src = "https://github.com/AidenY915/stroll_spring/blob/images_for_readme/images_for_readme/aroundme.png" width = "800px">
-    <img src = "https://github.com/AidenY915/stroll_spring/blob/images_for_readme/images_for_readme/kakaomap.png" width = "800px">
-    <img src = "https://github.com/AidenY915/stroll_spring/blob/images_for_readme/images_for_readme/sorting.png" width = "800px">
+    <img src = "https://github.com/AidenY915/stroll_spring/blob/main/images_for_readme/aroundme.png" width = "800px">
+    <img src = "https://github.com/AidenY915/stroll_spring/blob/main/images_for_readme/kakaomap.png" width = "800px">
+    <img src = "https://github.com/AidenY915/stroll_spring/blob/main/images_for_readme/sorting.png" width = "800px">
   </div>
   <div>
     <h4>장소 상세 페이지</h4>
-    <img src = "https://github.com/AidenY915/stroll_spring/blob/images_for_readme/images_for_readme/placeDetail.png" width = "800px">
+    <img src = "https://github.com/AidenY915/stroll_spring/blob/main/images_for_readme/placeDetail.png" width = "800px">
   </div>
   <div>
     <h4>마이페이지</h4>
-    <img src = "https://github.com/AidenY915/stroll_spring/blob/images_for_readme/images_for_readme/myPage.png" width = "800px">
+    <img src = "https://github.com/AidenY915/stroll_spring/blob/main/images_for_readme/myPage.png" width = "800px">
   </div>
 </div>
 <hr>
 <div align="center">
   <h3>ERD</h3>
-    <img src = "https://github.com/AidenY915/stroll_spring/blob/images_for_readme/images_for_readme/ERD.png" width = "300px" align="center">
+    <img src = "https://github.com/AidenY915/stroll_spring/blob/main/images_for_readme/ERD.png" width = "300px" align="center">
 </div>
 <hr>
 <div>
