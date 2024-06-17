@@ -17,6 +17,8 @@
   1. 카카오맵을 통해 입력한 위치를 기준으로 주변의 반려동물 동반 가능 시설들을 거리 순으로 정렬해서 보여준다. <br/>
   2. 시설의 주소나 이름으로 관련 시설들을 검색해준다. <br/>
 </div>
+<div>
+</div>
 <hr>
 <div>
   <h3>Stacks</h3>
@@ -33,4 +35,3 @@
   <img src="https://img.shields.io/badge/apache tomcat-F8DC75?style=for-the-badge&logo=apachetomcat&logoColor=white">
   <br/>
 </div>
-
