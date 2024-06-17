@@ -18,6 +18,33 @@
   2. 시설의 주소나 이름으로 관련 시설들을 검색해준다. <br/>
 </div>
 <hr>
+<div align="center">
+  <h3>페이지별 이미지</h3>
+  <div>
+    <h4>메인</h4>
+    <img src = "https://github.com/AidenY915/stroll_spring/blob/images_for_readme/images_for_readme/main.png" width = "800px">
+  </div>
+  <div>
+    <h4>내 주변</h4>
+    <img src = "https://github.com/AidenY915/stroll_spring/blob/images_for_readme/images_for_readme/aroundme.png" width = "800px">
+    <img src = "https://github.com/AidenY915/stroll_spring/blob/images_for_readme/images_for_readme/kakaomap.png" width = "800px">
+    <img src = "https://github.com/AidenY915/stroll_spring/blob/images_for_readme/images_for_readme/sorting.png" width = "800px">
+  </div>
+  <div>
+    <h4>장소 상세 페이지</h4>
+    <img src = "https://github.com/AidenY915/stroll_spring/blob/images_for_readme/images_for_readme/placeDetail.png" width = "800px">
+  </div>
+  <div>
+    <h4>마이페이지</h4>
+    <img src = "https://github.com/AidenY915/stroll_spring/blob/images_for_readme/images_for_readme/myPage.png" width = "800px">
+  </div>
+</div>
+<hr>
+<div align="center">
+  <h3>ERD</h3>
+    <img src = "https://github.com/AidenY915/stroll_spring/blob/images_for_readme/images_for_readme/ERD.png" width = "300px" align="center">
+</div>
+<hr>
 <div>
   <h3>Stacks</h3>
   <h5>Front-end</h5>
@@ -33,4 +60,3 @@
   <img src="https://img.shields.io/badge/apache tomcat-F8DC75?style=for-the-badge&logo=apachetomcat&logoColor=white">
   <br/>
 </div>
-
