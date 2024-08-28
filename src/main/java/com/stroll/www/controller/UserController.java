@@ -32,7 +32,7 @@ public class UserController {
 		}
 		System.out.println("id : " + id);
 		System.out.println(path);
-		return "redirect:" + path.replace("/stroll", "");
+		return "redirect:" + path.replace(request.getContextPath(), "");
 	}
 
 	@RequestMapping(value = "/logout")
