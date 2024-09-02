@@ -1,5 +1,14 @@
 CREATE DATABASE stroll;
 use stroll;
+
+DROP TABLE IF EXISTS user;
+CREATE TABLE user(
+	id CHAR(20) PRIMARY KEY,
+    password CHAR(20) NOT NULL,
+    nickname CHAR(20) NOT NULL UNIQUE,
+    email CHAR(50) NOT NULL
+);
+
 DROP TABLE IF EXISTS place;
 CREATE TABLE place(
 	no INT PRIMARY KEY AUTO_INCREMENT,
@@ -16,15 +25,6 @@ CREATE TABLE place(
 );
 CREATE INDEX ix_place_userId ON place(userId);
 CREATE INDEX ix_place_address ON place(address);
-
-DROP TABLE IF EXISTS user;
-CREATE TABLE user(
-	id CHAR(20) PRIMARY KEY,
-    password CHAR(20) NOT NULL,
-    nickname CHAR(20) NOT NULL UNIQUE,
-    email CHAR(50) NOT NULL
-);
-
 
 DROP TABLE IF EXISTS reply;
 CREATE TABLE reply(
