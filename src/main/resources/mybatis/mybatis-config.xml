@@ -12,11 +12,13 @@
 		<typeAlias alias="user" type="com.stroll.www.vo.UserVO" />
 		<typeAlias alias="reply" type="com.stroll.www.vo.ReplyVO" />
 		<typeAlias alias="wish" type="com.stroll.www.vo.WishVO" />
+		<typeAlias alias="image" type="com.stroll.www.vo.ImageVO" />
 	</typeAliases>
 
 	<mappers>
 		<mapper resource="mybatis/mappings/place-mapping.xml" />
 		<mapper resource="mybatis/mappings/user-mapping.xml" />
 		<mapper resource="mybatis/mappings/reply-mapping.xml" />
+		<mapper resource="mybatis/mappings/image-mapping.xml" />
 	</mappers>
 </configuration>

@@ -21,10 +21,18 @@ CREATE TABLE place(
     x double NOT NULL,
     y double NOT NULL,
     userId CHAR(20) NOT NULL,
-    CONSTRAINT fk_place_user_id FOREIGN KEY (userId) REFERENCES user(id) ON DELETE CASCADE
+    CONSTRAINT fk_place_user_id FOREIGN KEY (userId) REFERENCES user(id) ON DELETE CASCADE,
+    UNIQUE KEY unique_title_address_detailAddress (title, address, detailAddress)
 );
 CREATE INDEX ix_place_userId ON place(userId);
 CREATE INDEX ix_place_address ON place(address);
+
+CREATE TABLE image(
+	no INT PRIMARY KEY AUTO_INCREMENT,
+    place_no INT,
+    image_path varchar(200),
+    CONSTRAINT fk_image_place_id FOREIGN KEY (place_no) REFERENCES place(no) ON UPDATE CASCADE
+);
 
 DROP TABLE IF EXISTS reply;
 CREATE TABLE reply(

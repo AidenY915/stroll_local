@@ -9,7 +9,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
@@ -21,13 +20,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.stroll.www.apikey.ApiKey;
+import com.stroll.www.dao.ImageDAO;
 import com.stroll.www.dao.PlaceDAO;
+import com.stroll.www.vo.ImageVO;
 import com.stroll.www.vo.PlaceVO;
 
 @Service
 public class PlaceService {
 	@Autowired
 	private PlaceDAO dao;
+	@Autowired
+	private ImageDAO imageDao; 
 	private final static int PAGE_SIZE = 10;
 
 	public PlaceVO getPlace(PlaceVO vo) {
@@ -79,14 +83,15 @@ public class PlaceService {
 		System.out.println(y);
 		vo.setX(Double.parseDouble(x));
 		vo.setY(Double.parseDouble(y));
-		dao.insertPlace(vo);
-		uploadImgs(imgs, vo);
+		int rslt = dao.insertPlace(vo);
+		if(rslt == 1)
+			uploadImgs(imgs, vo);
 		return vo.getNo();
 		// ,"x":"127.030921234166","y":"37.4924272855457"
 	}
 
 	private String getKakaoCoordinate(String address) {
-		String apiKey = "7cb356828f22bbbdc0fd58da42790461";
+		String apiKey = ApiKey.kakaoApiKey;
 		String apiUrl = "https://dapi.kakao.com/v2/local/search/address.json";
 		String jsonString = null;
 		System.out.println(address);
@@ -129,9 +134,14 @@ public class PlaceService {
 				break;
 			try {
 				// String extension = imgs[i].getOriginalFilename().split("\\.")[1]; jpg로 통일
-				imgs[i].transferTo(new File(
-						"C:\\Users\\Aiden\\Documents\\Codes\\SPRING\\stroll\\src\\main\\webapp\\resources\\upload\\imgs\\"
-								+ vo.getNo() + "_" + (i + 1) + "." + "jpg"));
+				String imgPath = "s3://stroll-s3/image/"
+						+ vo.getNo() + "_" + (i + 1) + "." + "jpg";
+				imgs[i].transferTo(new File(imgPath));
+				//img 테이블에 추가
+				ImageVO imgVo = new ImageVO();
+				imgVo.setImagePath(imgPath);
+				imgVo.setPlaceNo(vo.getNo());
+				imageDao.insertImg(imgVo);
 			} catch (IllegalStateException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
@@ -140,25 +150,13 @@ public class PlaceService {
 		}
 		return;
 	}
-
+	
 	public List<String> getImgs(PlaceVO vo) {
-		File dir = new File(
-				"C:\\Users\\Aiden\\Documents\\Codes\\SPRING\\stroll\\src\\main\\webapp\\resources\\upload\\imgs\\");
-		String[] fileNames = dir.list(); // 자동 이름 순 정렬
-		if (fileNames == null) {
-			return null;
+		List<ImageVO> imgs = imageDao.selectImgsByPlaceNo(vo.getNo());
+		List<String> rslt = new LinkedList<String>();
+		for(ImageVO img : imgs) {
+			rslt.add(img.getImagePath());
 		}
-		List<String> rslt = new ArrayList<>(fileNames.length);
-		boolean endFlag = false;
-		for (String fileName : fileNames) {
-			System.out.println(fileName);
-			if (fileName.split("_")[0].equals("" + vo.getNo())) {
-				rslt.add("resources/upload/imgs/" + fileName);
-				endFlag = true;
-			} else if (endFlag)
-				break;
-		}
-		System.out.println(rslt);
 		return rslt;
 	}
 
