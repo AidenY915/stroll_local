@@ -11,7 +11,7 @@
 	<mvc:annotation-driven />
 	<mvc:resources mapping="/pages/**" location="/pages/" />
 	<mvc:resources mapping="/resources/**" location="/resources/" />
-	
+	<mvc:resources mapping="/images/**" location="file:///C:/stroll_image/" />
 	<context:component-scan base-package="com.stroll.www"/>
 	
 	<bean id="viewResolver" class ="org.springframework.web.servlet.view.InternalResourceViewResolver">

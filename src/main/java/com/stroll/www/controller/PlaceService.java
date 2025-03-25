@@ -28,11 +28,17 @@ import com.stroll.www.vo.PlaceVO;
 
 @Service
 public class PlaceService {
+
+//    private final PageController pageController;
 	@Autowired
 	private PlaceDAO dao;
 	@Autowired
 	private ImageDAO imageDao; 
 	private final static int PAGE_SIZE = 10;
+
+//    PlaceService(PageController pageController) {
+//        this.pageController = pageController;
+//    }
 
 	public PlaceVO getPlace(PlaceVO vo) {
 		vo = dao.getPlace(vo);
@@ -77,8 +83,9 @@ public class PlaceService {
 
 	public int insertPlace(PlaceVO vo, MultipartFile[] imgs) {
 		String jsonStr = getKakaoCoordinate(vo.getAddress() + vo.getDetailAddress());
-		String x = jsonStr.split("\"x\":\"")[1].split("\"")[0];
-		String y = jsonStr.split("\"y\":\"")[1].split("\"")[0];
+//		String x = jsonStr.split("\"x\":\"")[1].split("\"")[0];
+//		String y = jsonStr.split("\"y\":\"")[1].split("\"")[0];
+		String x = "0", y ="0";
 		System.out.println(x);
 		System.out.println(y);
 		vo.setX(Double.parseDouble(x));
@@ -134,12 +141,12 @@ public class PlaceService {
 				break;
 			try {
 				// String extension = imgs[i].getOriginalFilename().split("\\.")[1]; jpg로 통일
-				String imgPath = "s3://stroll-s3/image/"
+				String imgPath = "C:/stroll_image/"
 						+ vo.getNo() + "_" + (i + 1) + "." + "jpg";
 				imgs[i].transferTo(new File(imgPath));
 				//img 테이블에 추가
 				ImageVO imgVo = new ImageVO();
-				imgVo.setImagePath(imgPath);
+				imgVo.setImagePath(imgPath.replace("C:/stroll_image", "images")); //presentation-layer에서 매핑
 				imgVo.setPlaceNo(vo.getNo());
 				imageDao.insertImg(imgVo);
 			} catch (IllegalStateException e) {
