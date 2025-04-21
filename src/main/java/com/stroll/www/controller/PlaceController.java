@@ -1,5 +1,8 @@
 package com.stroll.www.controller;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -23,9 +26,22 @@ public class PlaceController {
 	private ReplyService replyService;
 	@Autowired
 	private UserService userService;
+	
+	private String extractGuAddress(String fullAddress) {
+		if (fullAddress == null || fullAddress.isEmpty()) {
+	        return "";
+	    }
+	    Pattern pattern = Pattern.compile("^(.+?(구|군))");
+	    Matcher matcher = pattern.matcher(fullAddress);
+	    if (matcher.find()) {
+	        return matcher.group(1).trim(); // 전체 매칭된 부분 리턴
+	    }
+	    return ""; // 구나 군이 없을 경우 빈 문자열
+	}
 
 	@RequestMapping("/aroundme")
-	public String showAroundme(PlaceVO vo, Model model, HttpServletRequest request) {
+	public String showAroundme(@RequestParam(value = "address", required = false) String address, PlaceVO vo, Model model, HttpServletRequest request) {
+		vo.setGuAddress(address);
 		String keywords = request.getParameter("keywords");
 		String order = request.getParameter("order");
 		String pageStr = request.getParameter("page");
@@ -60,12 +76,14 @@ public class PlaceController {
 		}
 		return "detail";
 	}
-
+	
 	@RequestMapping(value = "/insertPlace", method = RequestMethod.POST)
-	public String insertPlace(@RequestParam("imgs") MultipartFile[] imgs, PlaceVO vo, HttpSession session, RedirectAttributes redirect) {
+	public String insertPlace(@RequestParam("imgs") MultipartFile[] imgs, @RequestParam("address") String address, PlaceVO vo, HttpSession session, RedirectAttributes redirect) {
 		String id = (String)session.getAttribute("id");
 		if(id == null) return "redirect:/";
 		vo.setUserId(id);
+		vo.setGuAddress(extractGuAddress(address));
+		vo.setAfterGuAddress(address.replace(vo.getGuAddress(),"").trim());
 		redirect.addAttribute("no", placeService.insertPlace(vo, imgs));
 		return "redirect:detail";
 	}

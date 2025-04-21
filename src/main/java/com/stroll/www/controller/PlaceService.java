@@ -13,11 +13,14 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.stroll.www.apikey.ApiKey;
@@ -29,16 +32,12 @@ import com.stroll.www.vo.PlaceVO;
 @Service
 public class PlaceService {
 
-//    private final PageController pageController;
 	@Autowired
 	private PlaceDAO dao;
 	@Autowired
 	private ImageDAO imageDao; 
 	private final static int PAGE_SIZE = 10;
 
-//    PlaceService(PageController pageController) {
-//        this.pageController = pageController;
-//    }
 
 	public PlaceVO getPlace(PlaceVO vo) {
 		vo = dao.getPlace(vo);
@@ -56,13 +55,13 @@ public class PlaceService {
 		vo.setDetailAddress(keywords);
 		if (vo.getCategory() == null)
 			vo.setCategory("");
-		if (vo.getAddress() == null || vo.getAddress().equals("")) {
-			vo.setAddress(keywords);
+		if (vo.getGuAddress() == null || vo.getGuAddress().equals("")) {		//내 위치 설정 -> 내 구에 있는 장소들만 검색
+			vo.setGuAddress(keywords);
 			listFromDb = dao.getPlaceList(vo);
 		} else {
-			String addressRegex = vo.getAddress().replaceAll("(특별시|광역시|시)", "[가-힣]{0,3}").replaceAll("^[가-힣]+도", "");
-			vo.setAddress(addressRegex);
-			listFromDb = dao.getPlaceListByAddress(vo);
+			String guAddressRegex = vo.getGuAddress().replaceAll("(특별시|광역시|시)", "[가-힣]{0,3}").replaceAll("^[가-힣]+도", "");
+			vo.setGuAddress(guAddressRegex);
+			listFromDb = dao.getPlaceListByGuAddress(vo);
 		}
 		for (PlaceVO place : listFromDb) {
 			place.setDistance((int) Math.pow(((Math.pow(place.getX() * 1849 - vo.getX() * 1849, 2)
@@ -80,12 +79,14 @@ public class PlaceService {
 		}
 		return rsltList;
 	}
+	
+	
 
 	public int insertPlace(PlaceVO vo, MultipartFile[] imgs) {
-		String jsonStr = getKakaoCoordinate(vo.getAddress() + vo.getDetailAddress());
-//		String x = jsonStr.split("\"x\":\"")[1].split("\"")[0];
-//		String y = jsonStr.split("\"y\":\"")[1].split("\"")[0];
-		String x = "0", y ="0";
+		String jsonStr = getKakaoCoordinate(vo.getGuAddress() + vo.getAfterGuAddress());
+		String x = jsonStr.split("\"x\":\"")[1].split("\"")[0];
+		String y = jsonStr.split("\"y\":\"")[1].split("\"")[0];
+//		String x = "0", y ="0";
 		System.out.println(x);
 		System.out.println(y);
 		vo.setX(Double.parseDouble(x));
@@ -98,6 +99,7 @@ public class PlaceService {
 	}
 
 	private String getKakaoCoordinate(String address) {
+		
 		String apiKey = ApiKey.kakaoApiKey;
 		String apiUrl = "https://dapi.kakao.com/v2/local/search/address.json";
 		String jsonString = null;
@@ -208,13 +210,14 @@ public class PlaceService {
 	}
 
 	private void deleteImgs(PlaceVO vo) {
-		File dir = new File(
-				"C:\\Users\\Aiden\\Documents\\Codes\\SPRING\\stroll\\src\\main\\webapp\\resources\\upload\\imgs\\");
-		File[] files = dir.listFiles();
-		for(File file : files)
-		if (file.getName().contains(vo.getNo()+"_")) {
+		List<ImageVO> imgs = imageDao.selectImgsByPlaceNo(vo.getNo());
+		
+		for(ImageVO img : imgs) {
+			File file = new File(img.getImagePath().replaceFirst("images", "C:/stroll_image"));
+			System.out.println(img.getImagePath());
 			if (file.delete()) {
 				System.out.println("파일삭제 성공");
+				imageDao.deleteImg(img.getNo());
 			} else {
 				System.out.println("파일삭제 실패");
 			}
